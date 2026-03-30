@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DeltaBoxx — Investing in Disruptive Technologies</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Inter', sans-serif; color: #0f172a; }
+    a { text-decoration: none; }
+
+    /* ── NAV ── */
+    nav {
+      position: absolute; top: 0; left: 0; right: 0;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 22px 48px; z-index: 100;
+    }
+    .logo { display: flex; align-items: center; gap: 10px; color: #fff; font-size: 18px; font-weight: 700; }
+    .logo-box {
+      width: 34px; height: 34px; background: #2563eb;
+      border-radius: 7px; display: grid; place-items: center; flex-shrink: 0;
+    }
+    .nav-links { display: flex; gap: 32px; list-style: none; }
+    .nav-links a { color: #fff; font-size: 14px; font-weight: 500; opacity: .85; }
+    .nav-links a:hover { opacity: 1; }
+
+    /* ── HERO ── */
+    .hero {
+      background: #070d24;
+      min-height: 440px;
+      display: flex; align-items: center; justify-content: center;
+      padding: 130px 20px 90px;
+      position: relative; overflow: hidden;
+    }
+    #starCanvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+    .hero-inner { position: relative; z-index: 1; text-align: center; }
+    .hero h1 { font-size: 54px; font-weight: 800; color: #fff; margin-bottom: 14px; }
+    .hero-tag { font-size: 21px; font-weight: 600; color: #fff; margin-bottom: 10px; }
+    .hero-sub { font-size: 15px; color: rgba(255,255,255,.6); margin-bottom: 32px; }
+    .btn-email {
+      display: inline-block; background: #2563eb; color: #fff;
+      padding: 13px 30px; border-radius: 999px; font-size: 14px; font-weight: 500;
+    }
+    .btn-email:hover { background: #1d4ed8; }
+
+    /* ── WHAT WE DO ── */
+    .what { padding: 76px 20px 40px; text-align: center; max-width: 680px; margin: 0 auto; }
+    .what h2 { font-size: 38px; font-weight: 800; margin-bottom: 18px; }
+    .what p { color: #64748b; font-size: 16px; line-height: 1.75; }
+
+    /* ── WORLD MAP ── */
+    .worldsec { padding: 16px 20px 76px; text-align: center; }
+    .worldsec h3 { font-size: 38px; font-weight: 800; line-height: 1.25; margin-bottom: 40px; color: #0f172a; }
+    .world-wrap { max-width: 740px; margin: 0 auto; }
+    .world-wrap svg { width: 100%; height: auto; }
+
+    /* ── FAQ ── */
+    .faq { background: #e8f0fe; padding: 76px 20px; }
+    .faq h2 { text-align: center; font-size: 42px; font-weight: 800; margin-bottom: 40px; }
+    .faq-list { max-width: 720px; margin: 0 auto; display: flex; flex-direction: column; gap: 14px; }
+    .faq-item { background: #fff; border-radius: 12px; }
+    .faq-q {
+      width: 100%; padding: 20px 24px;
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 16px; font-weight: 700; color: #0f172a;
+      background: none; border: none; cursor: pointer; text-align: left; gap: 16px;
+    }
+    .faq-icon { font-size: 22px; color: #475569; flex-shrink: 0; }
+    .faq-a { display: none; padding: 0 24px 20px; font-size: 15px; color: #475569; line-height: 1.8; }
+    .faq-item.open .faq-a { display: block; }
+
+    /* ── FOOTER ── */
+    footer { background: #0a0a0a; color: rgba(255,255,255,.45); padding: 28px; text-align: center; font-size: 13px; }
+
+    @media (max-width: 640px) {
+      nav { padding: 18px 20px; }
+      .nav-links { gap: 18px; }
+      .nav-links a { font-size: 13px; }
+      .hero h1 { font-size: 36px; }
+      .hero-tag { font-size: 17px; }
+      .what h2, .worldsec h3, .faq h2 { font-size: 28px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <canvas id="starCanvas"></canvas>
+  <nav>
+    <a class="logo" href="index.html">
+      <div class="logo-box">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+          <rect x="2" y="2" width="14" height="14" rx="2" stroke="white" stroke-width="2"/>
+          <path d="M9 5v8M5 9h8" stroke="white" stroke-width="1.8" stroke-linecap="round"/>
+        </svg>
+      </div>
+      DeltaBoxx
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="venture.html">Venture</a></li>
+      <li><a href="about.html">About Us</a></li>
+      <li><a href="client-login.html">Client Login</a></li>
+    </ul>
+  </nav>
+  <div class="hero-inner">
+    <h1>DeltaBoxx</h1>
+    <p class="hero-tag">Investing in Disruptive Technologies</p>
+    <p class="hero-sub">A digital asset firm in blockchain-based capital markets.</p>
+    <a href="mailto:info@deltaboxx.com" class="btn-email">info@deltaboxx.com</a>
+  </div>
+</section>
+
+<!-- WHAT WE DO -->
+<div class="what">
+  <h2>What We Do</h2>
+  <p>DeltaBoxx is an early-stage venture capital firm investing in distributed ledger technologies and cryptocurrency assets.</p>
+</div>
+
+<!-- WORLD MAP -->
+<section class="worldsec">
+  <h3>Investing in Projects<br>Around The World.</h3>
+  <div class="world-wrap">
+    <svg viewBox="0 0 900 430" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <pattern id="dp" x="0" y="0" width="11" height="11" patternUnits="userSpaceOnUse">
+          <circle cx="5.5" cy="5.5" r="1.7" fill="#94a3b8" opacity="0.5"/>
+        </pattern>
+      </defs>
+
+      <!-- North America -->
+      <path d="M 95,68 L 148,58 L 208,54 L 252,66 L 268,84 L 270,106 L 256,130
+               L 240,154 L 224,172 L 204,186 L 178,189 L 156,182 L 136,166
+               L 114,148 L 100,126 L 92,102 Z" fill="url(#dp)"/>
+      <!-- Central America -->
+      <path d="M 166,189 L 196,192 L 186,218 L 164,220 L 154,206 Z" fill="url(#dp)"/>
+      <!-- Greenland -->
+      <path d="M 240,30 L 290,20 L 308,40 L 298,62 L 264,68 L 242,54 Z" fill="url(#dp)"/>
+
+      <!-- South America -->
+      <path d="M 176,230 L 226,222 L 268,236 L 282,272 L 280,318 L 260,360
+               L 228,378 L 198,370 L 172,346 L 160,310 L 158,268 L 164,244 Z" fill="url(#dp)"/>
+
+      <!-- Europe -->
+      <path d="M 396,68 L 452,58 L 494,66 L 514,84 L 516,104 L 504,120
+               L 478,130 L 448,132 L 418,120 L 400,104 Z" fill="url(#dp)"/>
+      <!-- Scandinavia -->
+      <path d="M 428,36 L 464,26 L 484,44 L 478,66 L 450,62 L 430,58 Z" fill="url(#dp)"/>
+      <!-- UK -->
+      <path d="M 390,72 L 408,66 L 414,82 L 404,92 L 390,86 Z" fill="url(#dp)"/>
+
+      <!-- Africa -->
+      <path d="M 404,148 L 458,140 L 514,146 L 544,174 L 554,220 L 550,274
+               L 530,328 L 496,358 L 460,362 L 422,344 L 402,306 L 392,254
+               L 390,198 L 394,166 Z" fill="url(#dp)"/>
+
+      <!-- Asia main -->
+      <path d="M 514,58 L 606,42 L 684,40 L 752,52 L 804,74 L 822,108
+               L 810,148 L 782,178 L 740,198 L 690,208 L 636,212 L 588,200
+               L 552,184 L 524,162 L 510,136 L 506,100 Z" fill="url(#dp)"/>
+      <!-- Arabia/Middle East -->
+      <path d="M 512,148 L 558,148 L 572,178 L 558,208 L 528,218 L 508,202 L 504,178 Z" fill="url(#dp)"/>
+      <!-- India -->
+      <path d="M 576,170 L 622,166 L 638,188 L 632,228 L 610,258 L 584,262
+               L 562,242 L 558,212 L 564,188 Z" fill="url(#dp)"/>
+      <!-- SE Asia peninsula -->
+      <path d="M 656,198 L 688,194 L 702,218 L 700,248 L 678,262
+               L 656,250 L 646,226 L 650,206 Z" fill="url(#dp)"/>
+      <!-- Japan -->
+      <path d="M 762,100 L 794,90 L 812,106 L 806,128 L 778,134 L 760,122 Z" fill="url(#dp)"/>
+
+      <!-- Australia -->
+      <path d="M 680,294 L 748,280 L 804,288 L 824,318 L 818,362 L 786,378
+               L 734,382 L 694,362 L 672,332 L 670,308 Z" fill="url(#dp)"/>
+      <!-- New Zealand (small) -->
+      <path d="M 840,350 L 858,340 L 866,360 L 852,372 L 836,364 Z" fill="url(#dp)"/>
+
+      <!-- CONNECTION ARCS -->
+      <!-- S. America → N. America -->
+      <path d="M 216,268 Q 172,216 194,178" stroke="#3b82f6" stroke-width="2.2" fill="none" opacity="0.85"/>
+      <!-- N. America → Europe -->
+      <path d="M 208,168 Q 312,108 444,102" stroke="#3b82f6" stroke-width="2.2" fill="none" opacity="0.85"/>
+      <!-- N. America → East Asia (long arc) -->
+      <path d="M 222,158 Q 460,36 736,118" stroke="#3b82f6" stroke-width="2.2" fill="none" opacity="0.85"/>
+
+      <!-- PIN MARKERS -->
+      <!-- S. America -->
+      <circle cx="216" cy="268" r="7" fill="#3b82f6" opacity="0.25"/>
+      <circle cx="216" cy="268" r="4.5" fill="#3b82f6"/>
+      <circle cx="216" cy="268" r="2" fill="white"/>
+      <!-- N. America (east coast) -->
+      <circle cx="208" cy="168" r="7" fill="#3b82f6" opacity="0.25"/>
+      <circle cx="208" cy="168" r="4.5" fill="#3b82f6"/>
+      <circle cx="208" cy="168" r="2" fill="white"/>
+      <!-- Europe -->
+      <circle cx="444" cy="102" r="7" fill="#3b82f6" opacity="0.25"/>
+      <circle cx="444" cy="102" r="4.5" fill="#3b82f6"/>
+      <circle cx="444" cy="102" r="2" fill="white"/>
+      <!-- East Asia -->
+      <circle cx="736" cy="118" r="7" fill="#3b82f6" opacity="0.25"/>
+      <circle cx="736" cy="118" r="4.5" fill="#3b82f6"/>
+      <circle cx="736" cy="118" r="2" fill="white"/>
+    </svg>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq">
+  <h2>FAQ</h2>
+  <div class="faq-list">
+
+    <div class="faq-item open">
+      <button class="faq-q">
+        What's your investment strategy?
+        <span class="faq-icon">−</span>
+      </button>
+      <div class="faq-a">
+        Our expert team conducts thorough research and analysis to identify promising ICOs and cryptocurrency projects. We focus on projects with strong fundamentals, innovative technology, and significant growth potential. Our diversified investment strategy involves spreading investments across 10–15 different coins to minimize risk and maximize returns.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q">
+        What security measures are in place to protect my investment?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-a">
+        Security is our top priority. We use multisig wallets for all transactions, ensuring that funds can only be moved with the approval of multiple team members. Additionally, our platform and smart contracts undergo regular security audits to prevent vulnerabilities.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q">
+        How can I invest in DeltaBoxx?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-a">
+        To invest, simply sign up by whitelisting with us on our platform and you will have access to our dashboard. It provides a straightforward way to monitor investments and returns.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q">
+        How are profits distributed?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-a">
+        Profits are distributed monthly to investors' wallets. Our platform takes a percentage share of the profits, aligning our success directly with that of our investors.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q">
+        As an investor, what kind of performance can be expected?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-a">
+        Our strategic approach aims to maximize gains, even through market wanes, and investors can expect monthly performance that exceeds 10%. We provide estimates based on our market analysis and past performance.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q">
+        What risks are involved in cryptocurrency investments?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-a">
+        Investing in cryptocurrencies involves risks, including market volatility, regulatory changes, and project failures. We mitigate these risks through careful selection, diversification, and constant market analysis. As traders, we place emphasis on proper stop losses and profit-taking.
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<footer>Copyright &copy; 2024 DeltaBoxx. All rights reserved.</footer>
+
+<script>
+// ── STARFIELD ──
+(function () {
+  const c = document.getElementById('starCanvas');
+  const hero = c.parentElement;
+  function resize() { c.width = hero.offsetWidth; c.height = hero.offsetHeight; }
+  resize();
+  window.addEventListener('resize', resize);
+
+  const stars = Array.from({ length: 130 }, () => ({
+    x: Math.random(), y: Math.random(),
+    r: Math.random() * 1.4 + 0.3,
+    a: Math.random(),
+    speed: Math.random() * 0.004 + 0.001
+  }));
+
+  function draw() {
+    const ctx = c.getContext('2d');
+    ctx.clearRect(0, 0, c.width, c.height);
+    stars.forEach(s => {
+      s.a += s.speed;
+      if (s.a > 1) s.a = 0;
+      ctx.beginPath();
+      ctx.arc(s.x * c.width, s.y * c.height, s.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(255,255,255,${s.a})`;
+      ctx.fill();
+    });
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+// ── FAQ ACCORDION ──
+document.querySelectorAll('.faq-q').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const item = btn.closest('.faq-item');
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => {
+      i.classList.remove('open');
+      i.querySelector('.faq-icon').textContent = '+';
+    });
+    if (!isOpen) {
+      item.classList.add('open');
+      btn.querySelector('.faq-icon').textContent = '−';
+    }
+  });
+});
+</script>
+</body>
+</html>
