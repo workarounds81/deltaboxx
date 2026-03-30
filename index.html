@@ -27,7 +27,7 @@
 
     /* ── HERO ── */
     .hero {
-      background: #070d24;
+      background: #000000;
       min-height: 440px;
       display: flex; align-items: center; justify-content: center;
       padding: 130px 20px 90px;
@@ -277,7 +277,7 @@
 <footer>Copyright &copy; 2024 DeltaBoxx. All rights reserved.</footer>
 
 <script>
-// ── STARFIELD ──
+// ── MESH GRADIENT ──
 (function () {
   const c = document.getElementById('starCanvas');
   const hero = c.parentElement;
@@ -285,24 +285,56 @@
   resize();
   window.addEventListener('resize', resize);
 
-  const stars = Array.from({ length: 130 }, () => ({
+  const ctx = c.getContext('2d');
+  let t = 0;
+
+  // color blobs: [ox, oy] = base position, [ax, ay] = amplitude, [fx, fy] = frequency, color RGB, alpha, size
+  const orbs = [
+    { ox:0.30, oy:0.45, ax:0.22, ay:0.18, fx:0.70, fy:0.55, rgb:[6,182,212],   a:0.65, s:0.65 },
+    { ox:0.72, oy:0.30, ax:0.18, ay:0.22, fx:0.60, fy:0.80, rgb:[249,115,22],  a:0.55, s:0.55 },
+    { ox:0.50, oy:0.65, ax:0.25, ay:0.15, fx:0.45, fy:0.65, rgb:[8,145,178],   a:0.50, s:0.60 },
+    { ox:0.18, oy:0.70, ax:0.12, ay:0.20, fx:0.90, fy:0.40, rgb:[22,78,99],    a:0.45, s:0.50 },
+    { ox:0.85, oy:0.55, ax:0.10, ay:0.12, fx:0.75, fy:0.35, rgb:[6,182,212],   a:0.40, s:0.40 },
+  ];
+
+  // subtle stars
+  const stars = Array.from({ length: 80 }, () => ({
     x: Math.random(), y: Math.random(),
-    r: Math.random() * 1.4 + 0.3,
-    a: Math.random(),
-    speed: Math.random() * 0.004 + 0.001
+    r: Math.random() * 1.2 + 0.2,
+    a: Math.random(), speed: Math.random() * 0.003 + 0.001
   }));
 
   function draw() {
-    const ctx = c.getContext('2d');
-    ctx.clearRect(0, 0, c.width, c.height);
+    t += 0.004;
+    const W = c.width, H = c.height;
+
+    ctx.fillStyle = '#000';
+    ctx.fillRect(0, 0, W, H);
+
+    ctx.globalCompositeOperation = 'screen';
+    orbs.forEach((o, i) => {
+      const x = (o.ox + o.ax * Math.sin(t * o.fx + i)) * W;
+      const y = (o.oy + o.ay * Math.cos(t * o.fy + i)) * H;
+      const r = Math.max(W, H) * o.s;
+      const [rv, gv, bv] = o.rgb;
+      const g = ctx.createRadialGradient(x, y, 0, x, y, r);
+      g.addColorStop(0,   `rgba(${rv},${gv},${bv},${o.a})`);
+      g.addColorStop(0.4, `rgba(${rv},${gv},${bv},${o.a * 0.35})`);
+      g.addColorStop(1,   `rgba(${rv},${gv},${bv},0)`);
+      ctx.fillStyle = g;
+      ctx.fillRect(0, 0, W, H);
+    });
+
+    ctx.globalCompositeOperation = 'source-over';
     stars.forEach(s => {
       s.a += s.speed;
       if (s.a > 1) s.a = 0;
       ctx.beginPath();
-      ctx.arc(s.x * c.width, s.y * c.height, s.r, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(255,255,255,${s.a})`;
+      ctx.arc(s.x * W, s.y * H, s.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(255,255,255,${s.a * 0.7})`;
       ctx.fill();
     });
+
     requestAnimationFrame(draw);
   }
   draw();
