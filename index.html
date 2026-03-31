@@ -3,348 +3,370 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DeltaBoxx — Investing in Disruptive Technologies</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <title>DeltaBoxx — Infrastructure First. Everything Else Follows.</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
-    @font-face {
-      font-family: Cyber;
-      src: url("https://assets.codepen.io/605876/Blender-Pro-Bold.otf");
-      font-display: swap;
-    }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: 'Inter', sans-serif; color: #0f172a; }
-    a { text-decoration: none; }
+    body { font-family: 'Inter', sans-serif; color: #1a1a2e; background: #fff; }
+    a { text-decoration: none; color: inherit; }
 
     /* ── NAV ── */
     nav {
-      position: absolute; top: 0; left: 0; right: 0;
       display: flex; align-items: center; justify-content: space-between;
-      padding: 22px 48px; z-index: 100;
+      padding: 18px 48px;
+      background: #fff;
+      border-bottom: 1px solid #e8e4df;
+      position: sticky; top: 0; z-index: 100;
     }
-    .logo { display: flex; align-items: center; gap: 10px; color: #fff; font-size: 18px; font-weight: 700; }
-    .logo-box {
-      width: 34px; height: 34px; background: #2563eb;
-      border-radius: 7px; display: grid; place-items: center; flex-shrink: 0;
+    .logo { display: flex; align-items: center; gap: 12px; }
+    .logo-text {
+      font-size: 17px; font-weight: 700; letter-spacing: 3px;
+      color: #722F37; text-transform: uppercase;
     }
-    .nav-links { display: flex; gap: 32px; list-style: none; }
-    .nav-links a { color: #fff; font-size: 14px; font-weight: 500; opacity: .85; }
-    .nav-links a:hover { opacity: 1; }
+    .nav-links { display: flex; gap: 28px; list-style: none; }
+    .nav-links a {
+      font-size: 13px; font-weight: 500; color: #636e72;
+      padding: 6px 0; border-bottom: 2px solid transparent;
+      transition: all 0.2s;
+    }
+    .nav-links a:hover, .nav-links a.active {
+      color: #722F37; border-bottom-color: #722F37;
+    }
 
     /* ── HERO ── */
     .hero {
-      background: #000000;
-      min-height: 440px;
+      background: #f8f6f3;
+      min-height: 560px;
       display: flex; align-items: center; justify-content: center;
-      padding: 130px 20px 90px;
+      padding: 80px 20px;
       position: relative; overflow: hidden;
     }
-    #starCanvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
-    .hero-inner { position: relative; z-index: 1; text-align: center; }
-    .hero h1 { font-size: 54px; font-weight: 800; color: #fff; margin-bottom: 14px; }
-    .hero-tag { font-size: 21px; font-weight: 600; color: #fff; margin-bottom: 10px; }
-    .hero-sub { font-size: 15px; color: rgba(255,255,255,.6); margin-bottom: 32px; }
-    /* ── CYBER BUTTON ── */
-    .cybr-btn {
-      --primary: hsl(var(--primary-hue), 85%, calc(var(--primary-lightness, 50) * 1%));
-      --shadow-primary: hsl(var(--shadow-primary-hue), 90%, 50%);
-      --primary-hue: 189;
-      --primary-lightness: 50;
-      --color: hsl(0, 0%, 100%);
-      --font-size: 18px;
-      --shadow-primary-hue: 210;
-      --label-size: 8px;
-      --shadow-secondary-hue: 170;
-      --shadow-secondary: hsl(var(--shadow-secondary-hue), 90%, 60%);
-      --clip: polygon(0 0, 100% 0, 100% 100%, 95% 100%, 95% 90%, 85% 90%, 85% 100%, 8% 100%, 0 70%);
-      --border: 3px;
-      --shimmy-distance: 5;
-      --clip-one: polygon(0 2%, 100% 2%, 100% 95%, 95% 95%, 95% 90%, 85% 90%, 85% 95%, 8% 95%, 0 70%);
-      --clip-two: polygon(0 78%, 100% 78%, 100% 100%, 95% 100%, 95% 90%, 85% 90%, 85% 100%, 8% 100%, 0 78%);
-      --clip-three: polygon(0 44%, 100% 44%, 100% 54%, 95% 54%, 95% 54%, 85% 54%, 85% 54%, 8% 54%, 0 54%);
-      --clip-four: polygon(0 0, 100% 0, 100% 0, 95% 0, 95% 0, 85% 0, 85% 0, 8% 0, 0 0);
-      --clip-five: polygon(0 0, 100% 0, 100% 0, 95% 0, 95% 0, 85% 0, 85% 0, 8% 0, 0 0);
-      --clip-six: polygon(0 40%, 100% 40%, 100% 85%, 95% 85%, 95% 85%, 85% 85%, 85% 85%, 8% 85%, 0 70%);
-      --clip-seven: polygon(0 63%, 100% 63%, 100% 80%, 95% 80%, 95% 80%, 85% 80%, 85% 80%, 8% 80%, 0 70%);
-      font-family: 'Cyber', 'Inter', sans-serif;
-      color: var(--color);
-      cursor: pointer;
-      background: transparent;
-      text-transform: uppercase;
-      font-size: var(--font-size);
-      outline: transparent;
-      letter-spacing: 2px;
-      position: relative;
-      font-weight: 700;
-      border: 0;
-      min-width: 240px;
-      height: 62px;
-      line-height: 62px;
-      transition: background 0.2s;
+    .hero-planes {
+      position: absolute; top: 50%; left: 50%;
+      transform: translate(-50%, -45%) perspective(900px) rotateX(60deg);
+      width: 800px; opacity: 0.35;
     }
-    .cybr-btn:after, .cybr-btn:before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0; bottom: 0;
-      clip-path: var(--clip);
-      z-index: -1;
+    .plane {
+      height: 10px; margin-bottom: 22px; border-radius: 2px;
     }
-    .cybr-btn:before { background: var(--shadow-primary); transform: translate(var(--border), 0); }
-    .cybr-btn:after  { background: var(--primary); }
-    .cybr-btn__tag {
-      position: absolute;
-      padding: 1px 4px;
-      letter-spacing: 1px;
-      line-height: 1;
-      bottom: -5%; right: 5%;
-      font-weight: normal;
-      color: #000;
-      font-size: var(--label-size);
+    .plane:nth-child(1) { background: rgba(114,47,55,0.08); box-shadow: 0 4px 20px rgba(114,47,55,0.04); }
+    .plane:nth-child(2) { background: rgba(114,47,55,0.14); box-shadow: 0 4px 20px rgba(114,47,55,0.06); }
+    .plane:nth-child(3) { background: rgba(114,47,55,0.25); box-shadow: 0 5px 25px rgba(114,47,55,0.10); }
+    .plane:nth-child(4) { background: rgba(114,47,55,0.40); box-shadow: 0 6px 30px rgba(114,47,55,0.14); }
+    .plane:nth-child(5) { background: rgba(114,47,55,0.60); box-shadow: 0 7px 35px rgba(114,47,55,0.18); }
+    .plane:nth-child(6) { background: rgba(114,47,55,0.80); box-shadow: 0 8px 40px rgba(114,47,55,0.22); }
+    .plane:nth-child(7) { background: #2D3436; box-shadow: 0 10px 50px rgba(45,52,54,0.25); }
+
+    .hero-content {
+      position: relative; z-index: 1;
+      text-align: center; max-width: 740px;
     }
-    .cybr-btn__glitch {
-      position: absolute;
-      top: calc(var(--border) * -1);
-      left: calc(var(--border) * -1);
-      right: calc(var(--border) * -1);
-      bottom: calc(var(--border) * -1);
-      background: var(--shadow-primary);
-      text-shadow: 2px 2px var(--shadow-primary), -2px -2px var(--shadow-secondary);
-      clip-path: var(--clip);
-      animation: glitch 2s infinite;
-      display: none;
+    .hero-label {
+      font-size: 14px; font-weight: 600; letter-spacing: 5px;
+      text-transform: uppercase; color: #722F37; margin-bottom: 36px;
     }
-    .cybr-btn:hover .cybr-btn__glitch { display: block; }
-    .cybr-btn__glitch:before {
-      content: '';
-      position: absolute;
-      top: calc(var(--border) * 1);
-      right: calc(var(--border) * 1);
-      bottom: calc(var(--border) * 1);
-      left: calc(var(--border) * 1);
-      clip-path: var(--clip);
-      background: var(--primary);
-      z-index: -1;
-    }
-    @keyframes glitch {
-      0%              { clip-path: var(--clip-one); }
-      2%, 8%          { clip-path: var(--clip-two); transform: translate(calc(var(--shimmy-distance) * -1%), 0); }
-      6%              { clip-path: var(--clip-two); transform: translate(calc(var(--shimmy-distance) * 1%), 0); }
-      9%              { clip-path: var(--clip-two); transform: translate(0, 0); }
-      10%             { clip-path: var(--clip-three); transform: translate(calc(var(--shimmy-distance) * 1%), 0); }
-      13%             { clip-path: var(--clip-three); transform: translate(0, 0); }
-      14%, 21%        { clip-path: var(--clip-four); transform: translate(calc(var(--shimmy-distance) * 1%), 0); }
-      25%             { clip-path: var(--clip-five); transform: translate(calc(var(--shimmy-distance) * 1%), 0); }
-      30%             { clip-path: var(--clip-five); transform: translate(calc(var(--shimmy-distance) * -1%), 0); }
-      35%, 45%        { clip-path: var(--clip-six); transform: translate(calc(var(--shimmy-distance) * -1%)); }
-      40%             { clip-path: var(--clip-six); transform: translate(calc(var(--shimmy-distance) * 1%)); }
-      50%             { clip-path: var(--clip-six); transform: translate(0, 0); }
-      55%             { clip-path: var(--clip-seven); transform: translate(calc(var(--shimmy-distance) * 1%), 0); }
-      60%             { clip-path: var(--clip-seven); transform: translate(0, 0); }
-      31%, 61%, 100%  { clip-path: var(--clip-four); }
+    .hero-text {
+      font-size: 16px; line-height: 1.9; color: #5a5a6e; font-weight: 400;
     }
 
-    /* ── WHAT WE DO ── */
-    .what { padding: 76px 20px 40px; text-align: center; max-width: 680px; margin: 0 auto; }
-    .what h2 { font-size: 38px; font-weight: 800; margin-bottom: 18px; }
-    .what p { color: #64748b; font-size: 16px; line-height: 1.75; }
+    /* ── MOTTO BAR ── */
+    .motto {
+      background: #722F37; color: rgba(255,255,255,0.85);
+      text-align: center; padding: 16px 20px;
+      font-size: 13px; font-weight: 500; letter-spacing: 3px; text-transform: uppercase;
+    }
 
-    /* ── WORLD MAP ── */
-    .worldsec { padding: 16px 20px 76px; text-align: center; }
-    .worldsec h3 { font-size: 38px; font-weight: 800; line-height: 1.25; margin-bottom: 40px; color: #0f172a; }
-    .world-wrap { max-width: 740px; margin: 0 auto; }
-    .world-wrap svg { width: 100%; height: auto; }
+    /* ── DIVIDER ── */
+    .divider { border: none; border-top: 1px solid #e8e4df; margin: 0; }
+
+    /* ── CONTENT SECTIONS ── */
+    .section-row {
+      display: flex; align-items: center; gap: 60px;
+      padding: 90px 48px; max-width: 1100px; margin: 0 auto;
+    }
+    .section-row.reverse { flex-direction: row-reverse; }
+    .section-image { flex: 1; display: flex; align-items: center; justify-content: center; }
+    .section-image svg { max-width: 100%; height: auto; }
+    .section-text { flex: 1; }
+    .section-text h2 {
+      font-size: 28px; font-weight: 800; color: #1a1a2e; margin-bottom: 22px;
+    }
+    .section-text p {
+      font-size: 15px; line-height: 1.9; color: #5a5a6e;
+    }
 
     /* ── FAQ ── */
-    .faq { background: #e8f0fe; padding: 76px 20px; }
-    .faq h2 { text-align: center; font-size: 42px; font-weight: 800; margin-bottom: 40px; }
+    .faq { background: #f8f6f3; padding: 76px 20px; }
+    .faq h2 {
+      text-align: center; font-size: 36px; font-weight: 800;
+      margin-bottom: 40px; color: #1a1a2e;
+    }
     .faq-list { max-width: 720px; margin: 0 auto; display: flex; flex-direction: column; gap: 14px; }
-    .faq-item { background: #fff; border-radius: 12px; }
+    .faq-item { background: #fff; border-radius: 10px; border: 1px solid #e8e4df; }
     .faq-q {
       width: 100%; padding: 20px 24px;
       display: flex; justify-content: space-between; align-items: center;
-      font-size: 16px; font-weight: 700; color: #0f172a;
+      font-size: 15px; font-weight: 600; color: #1a1a2e;
       background: none; border: none; cursor: pointer; text-align: left; gap: 16px;
+      font-family: 'Inter', sans-serif;
     }
-    .faq-icon { font-size: 22px; color: #475569; flex-shrink: 0; }
-    .faq-a { display: none; padding: 0 24px 20px; font-size: 15px; color: #475569; line-height: 1.8; }
+    .faq-icon { font-size: 20px; color: #722F37; flex-shrink: 0; }
+    .faq-a { display: none; padding: 0 24px 20px; font-size: 14px; color: #5a5a6e; line-height: 1.8; }
     .faq-item.open .faq-a { display: block; }
 
     /* ── FOOTER ── */
-    footer { background: #0a0a0a; color: rgba(255,255,255,.45); padding: 28px; text-align: center; font-size: 13px; }
+    footer {
+      background: #2D3436; color: rgba(255,255,255,0.45);
+      padding: 28px; text-align: center; font-size: 13px;
+    }
 
-    @media (max-width: 640px) {
-      nav { padding: 18px 20px; }
-      .nav-links { gap: 18px; }
-      .nav-links a { font-size: 13px; }
-      .hero h1 { font-size: 36px; }
-      .hero-tag { font-size: 17px; }
-      .what h2, .worldsec h3, .faq h2 { font-size: 28px; }
+    @media (max-width: 768px) {
+      nav { padding: 16px 20px; flex-wrap: wrap; gap: 12px; }
+      .nav-links { gap: 14px; flex-wrap: wrap; }
+      .nav-links a { font-size: 12px; }
+      .hero { min-height: 440px; padding: 60px 20px; }
+      .hero-planes { width: 500px; }
+      .hero-label { font-size: 12px; letter-spacing: 3px; }
+      .hero-text { font-size: 14px; }
+      .section-row, .section-row.reverse {
+        flex-direction: column; padding: 50px 20px; gap: 36px;
+      }
+      .faq h2 { font-size: 28px; }
     }
   </style>
 </head>
 <body>
 
-<!-- HERO -->
-<section class="hero">
-  <canvas id="starCanvas"></canvas>
-  <nav>
-    <a class="logo" href="index.html">
-      <div class="logo-box">
-        <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-          <rect x="2" y="2" width="14" height="14" rx="2" stroke="white" stroke-width="2"/>
-          <path d="M9 5v8M5 9h8" stroke="white" stroke-width="1.8" stroke-linecap="round"/>
-        </svg>
-      </div>
-      DeltaBoxx
-    </a>
-    <ul class="nav-links">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="venture.html">Venture</a></li>
-      <li><a href="about.html">About Us</a></li>
-      <li><a href="client-login.html">Client Login</a></li>
-    </ul>
-  </nav>
-  <div class="hero-inner">
-    <h1>DeltaBoxx</h1>
-    <p class="hero-tag">Investing in Disruptive Technologies</p>
-    <p class="hero-sub">A digital asset firm in blockchain-based capital markets.</p>
-    <a href="mailto:info@deltaboxx.com" style="text-decoration:none;display:inline-block;position:relative;z-index:1;">
-      <button class="cybr-btn">
-        Contact Us<span aria-hidden>_</span>
-        <span aria-hidden class="cybr-btn__glitch">Contact Us_</span>
-        <span aria-hidden class="cybr-btn__tag">R25</span>
-      </button>
-    </a>
+<!-- NAV -->
+<nav>
+  <a class="logo" href="index.html">
+    <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
+      <rect width="36" height="36" rx="5" fill="#722F37"/>
+      <path d="M18 7L30 29H6Z" stroke="white" stroke-width="2.2" fill="none" stroke-linejoin="round"/>
+      <path d="M18 14L25 28H11Z" stroke="white" stroke-width="1.4" fill="none" stroke-linejoin="round"/>
+    </svg>
+    <span class="logo-text">DeltaBoxx</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html" class="active">Home</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="#framework">Investment Framework</a></li>
+    <li><a href="venture.html">Portfolio</a></li>
+    <li><a href="#">News</a></li>
+    <li><a href="client-login.html">Investor Login</a></li>
+  </ul>
+</nav>
+
+<!-- MOTTO BAR -->
+<div class="motto">Infrastructure First. Everything Else Follows.</div>
+
+<!-- HERO — Investment Framework -->
+<section class="hero" id="framework">
+  <div class="hero-planes">
+    <div class="plane"></div>
+    <div class="plane"></div>
+    <div class="plane"></div>
+    <div class="plane"></div>
+    <div class="plane"></div>
+    <div class="plane"></div>
+    <div class="plane"></div>
+  </div>
+  <div class="hero-content">
+    <p class="hero-label">Investment Framework</p>
+    <p class="hero-text">
+      Deltaboxx is a venture capital firm investing in blockchain infrastructure and digital assets,
+      backing high-conviction projects across the decentralized ecosystem. We partner with visionary
+      founders to accelerate technologies that are reshaping finance, ownership, and digital
+      interaction&mdash;driving the next wave of scalable, real-world blockchain adoption and long-term
+      socioeconomic transformation.
+    </p>
   </div>
 </section>
 
-<!-- WHAT WE DO -->
-<div class="what">
-  <h2>What We Do</h2>
-  <p>DeltaBoxx is an early-stage venture capital firm investing in distributed ledger technologies and cryptocurrency assets.</p>
-</div>
+<hr class="divider">
 
-<!-- WORLD MAP -->
-<section class="worldsec">
-  <h3>Investing in Projects<br>Around The World.</h3>
-  <div class="world-wrap">
-    <svg viewBox="0 0 900 430" xmlns="http://www.w3.org/2000/svg">
+<!-- FOUNDATIONAL INFRASTRUCTURE -->
+<section class="section-row">
+  <div class="section-image">
+    <!-- Isometric cube stack illustration -->
+    <svg width="360" height="320" viewBox="0 0 360 320" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- Faint grid lines -->
+      <line x1="30" y1="160" x2="330" y2="60" stroke="#e8e4df" stroke-width="0.6"/>
+      <line x1="30" y1="160" x2="330" y2="260" stroke="#e8e4df" stroke-width="0.6"/>
+      <line x1="80" y1="50" x2="280" y2="270" stroke="#e8e4df" stroke-width="0.6"/>
+      <line x1="80" y1="270" x2="280" y2="50" stroke="#e8e4df" stroke-width="0.6"/>
+
+      <!-- Back top cube — wireframe outline -->
+      <path d="M180 68 L214 52 L248 68 L214 84Z" fill="none" stroke="#d0ccc7" stroke-width="0.8"/>
+      <path d="M180 68 L180 108 L214 124 L214 84Z" fill="none" stroke="#d0ccc7" stroke-width="0.8"/>
+      <path d="M214 84 L214 124 L248 108 L248 68Z" fill="none" stroke="#d0ccc7" stroke-width="0.8"/>
+
+      <!-- White cube — left middle -->
+      <path d="M112 128 L146 112 L180 128 L146 144Z" fill="#f0ede8"/>
+      <path d="M112 128 L112 168 L146 184 L146 144Z" fill="#e4e0db"/>
+      <path d="M146 144 L146 184 L180 168 L180 128Z" fill="#dbd7d2"/>
+
+      <!-- Gray cube — center middle -->
+      <path d="M146 112 L180 96 L214 112 L180 128Z" fill="#c8c4bf"/>
+      <path d="M146 112 L146 152 L180 168 L180 128Z" fill="#b8b4af"/>
+      <path d="M180 128 L180 168 L214 152 L214 112Z" fill="#c0bcb7"/>
+
+      <!-- Dark slate cube — right middle -->
+      <path d="M180 128 L214 112 L248 128 L214 144Z" fill="#3a3f42"/>
+      <path d="M180 128 L180 168 L214 184 L214 144Z" fill="#2D3436"/>
+      <path d="M214 144 L214 184 L248 168 L248 128Z" fill="#353a3c"/>
+
+      <!-- Teal cube — far right -->
+      <path d="M214 112 L248 96 L282 112 L248 128Z" fill="#0ea5c9"/>
+      <path d="M214 112 L214 152 L248 168 L248 128Z" fill="#0891b2"/>
+      <path d="M248 128 L248 168 L282 152 L282 112Z" fill="#0c9ec2"/>
+
+      <!-- White cube — bottom left -->
+      <path d="M112 168 L146 152 L180 168 L146 184Z" fill="#f5f2ed"/>
+      <path d="M112 168 L112 208 L146 224 L146 184Z" fill="#e8e4df"/>
+      <path d="M146 184 L146 224 L180 208 L180 168Z" fill="#dfdbd6"/>
+
+      <!-- Dark cube — bottom center -->
+      <path d="M146 184 L180 168 L214 184 L180 200Z" fill="#2D3436"/>
+      <path d="M146 184 L146 224 L180 240 L180 200Z" fill="#252a2c"/>
+      <path d="M180 200 L180 240 L214 224 L214 184Z" fill="#2a2f31"/>
+
+      <!-- Burgundy cube — bottom right -->
+      <path d="M180 168 L214 152 L248 168 L214 184Z" fill="#8B3A42"/>
+      <path d="M180 168 L180 208 L214 224 L214 184Z" fill="#722F37"/>
+      <path d="M214 184 L214 224 L248 208 L248 168Z" fill="#7d3340"/>
+
+      <!-- Small dark cube — far bottom right -->
+      <path d="M214 184 L248 168 L282 184 L248 200Z" fill="#3a3f42"/>
+      <path d="M214 184 L214 224 L248 240 L248 200Z" fill="#2D3436"/>
+      <path d="M248 200 L248 240 L282 224 L282 184Z" fill="#353a3c"/>
+    </svg>
+  </div>
+  <div class="section-text">
+    <h2>Foundational Infrastructure</h2>
+    <p>
+      We invest in the base layers of the decentralized stack&mdash;protocols, infrastructure, and tooling
+      that enable trust-minimized systems at scale. These are the primitives that redefine how value moves,
+      how systems coordinate, and how the internet operates.
+    </p>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- DIGITAL OWNERSHIP & IDENTITY -->
+<section class="section-row reverse">
+  <div class="section-text">
+    <h2>Digital Ownership &amp; Identity</h2>
+    <p>
+      We back systems that shift control from platforms to users&mdash;where identity, data, and assets
+      are owned, portable, and composable. This unlocks a new internet where users, not intermediaries,
+      capture the value they create.
+    </p>
+  </div>
+  <div class="section-image">
+    <!-- Phone with security illustration -->
+    <svg width="340" height="320" viewBox="0 0 340 320" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- Phone body -->
+      <rect x="100" y="60" width="140" height="240" rx="16" fill="#2D3436" stroke="#3a3f42" stroke-width="2"/>
+      <rect x="108" y="76" width="124" height="208" rx="4" fill="#1a1e20"/>
+      <!-- Screen glow -->
+      <rect x="108" y="76" width="124" height="208" rx="4" fill="url(#screenGlow)" opacity="0.6"/>
       <defs>
-        <pattern id="dp" x="0" y="0" width="11" height="11" patternUnits="userSpaceOnUse">
-          <circle cx="5.5" cy="5.5" r="1.7" fill="#94a3b8" opacity="0.5"/>
-        </pattern>
+        <radialGradient id="screenGlow" cx="50%" cy="40%" r="70%">
+          <stop offset="0%" stop-color="#0891b2" stop-opacity="0.3"/>
+          <stop offset="100%" stop-color="#1a1e20" stop-opacity="0"/>
+        </radialGradient>
       </defs>
+      <!-- Shield icon on screen -->
+      <path d="M170 120 L170 160 Q170 185 150 195 Q170 205 190 195 Q170 185 170 160Z" fill="none" stroke="#0ea5c9" stroke-width="2" opacity="0.8"/>
+      <path d="M155 130 L170 118 L185 130 L185 158 Q185 175 170 185 Q155 175 155 158Z" fill="#0891b2" opacity="0.15" stroke="#0ea5c9" stroke-width="1.5"/>
+      <!-- User icon inside shield -->
+      <circle cx="170" cy="145" r="6" fill="none" stroke="#0ea5c9" stroke-width="1.5"/>
+      <path d="M160 165 Q160 157 170 155 Q180 157 180 165" fill="none" stroke="#0ea5c9" stroke-width="1.5"/>
+      <!-- Home button dot -->
+      <circle cx="170" cy="272" r="4" fill="none" stroke="#4a4f52" stroke-width="1"/>
 
-      <!-- North America -->
-      <path d="M 95,68 L 148,58 L 208,54 L 252,66 L 268,84 L 270,106 L 256,130
-               L 240,154 L 224,172 L 204,186 L 178,189 L 156,182 L 136,166
-               L 114,148 L 100,126 L 92,102 Z" fill="url(#dp)"/>
-      <!-- Central America -->
-      <path d="M 166,189 L 196,192 L 186,218 L 164,220 L 154,206 Z" fill="url(#dp)"/>
-      <!-- Greenland -->
-      <path d="M 240,30 L 290,20 L 308,40 L 298,62 L 264,68 L 242,54 Z" fill="url(#dp)"/>
+      <!-- Floating elements -->
+      <!-- Lock icon - top right -->
+      <rect x="248" y="80" width="40" height="40" rx="8" fill="#722F37" opacity="0.9"/>
+      <rect x="261" y="96" width="14" height="12" rx="2" fill="none" stroke="white" stroke-width="1.5"/>
+      <path d="M264 96 L264 90 Q264 85 268 85 Q272 85 272 90 L272 96" fill="none" stroke="white" stroke-width="1.5"/>
 
-      <!-- South America -->
-      <path d="M 176,230 L 226,222 L 268,236 L 282,272 L 280,318 L 260,360
-               L 228,378 L 198,370 L 172,346 L 160,310 L 158,268 L 164,244 Z" fill="url(#dp)"/>
+      <!-- Node/network icon - left -->
+      <circle cx="62" cy="170" r="18" fill="#0891b2" opacity="0.12" stroke="#0891b2" stroke-width="1.5"/>
+      <circle cx="62" cy="170" r="5" fill="#0891b2" opacity="0.6"/>
+      <circle cx="50" cy="155" r="3" fill="#0891b2" opacity="0.4"/>
+      <circle cx="74" cy="155" r="3" fill="#0891b2" opacity="0.4"/>
+      <circle cx="50" cy="185" r="3" fill="#0891b2" opacity="0.4"/>
+      <circle cx="74" cy="185" r="3" fill="#0891b2" opacity="0.4"/>
+      <line x1="62" y1="170" x2="50" y2="155" stroke="#0891b2" stroke-width="0.8" opacity="0.5"/>
+      <line x1="62" y1="170" x2="74" y2="155" stroke="#0891b2" stroke-width="0.8" opacity="0.5"/>
+      <line x1="62" y1="170" x2="50" y2="185" stroke="#0891b2" stroke-width="0.8" opacity="0.5"/>
+      <line x1="62" y1="170" x2="74" y2="185" stroke="#0891b2" stroke-width="0.8" opacity="0.5"/>
 
-      <!-- Europe -->
-      <path d="M 396,68 L 452,58 L 494,66 L 514,84 L 516,104 L 504,120
-               L 478,130 L 448,132 L 418,120 L 400,104 Z" fill="url(#dp)"/>
-      <!-- Scandinavia -->
-      <path d="M 428,36 L 464,26 L 484,44 L 478,66 L 450,62 L 430,58 Z" fill="url(#dp)"/>
-      <!-- UK -->
-      <path d="M 390,72 L 408,66 L 414,82 L 404,92 L 390,86 Z" fill="url(#dp)"/>
+      <!-- User badge - top left -->
+      <circle cx="72" cy="100" r="16" fill="#0891b2" opacity="0.15" stroke="#0891b2" stroke-width="1.2"/>
+      <circle cx="72" cy="95" r="5" fill="none" stroke="#0891b2" stroke-width="1.2"/>
+      <path d="M63 110 Q63 103 72 101 Q81 103 81 110" fill="none" stroke="#0891b2" stroke-width="1.2"/>
 
-      <!-- Africa -->
-      <path d="M 404,148 L 458,140 L 514,146 L 544,174 L 554,220 L 550,274
-               L 530,328 L 496,358 L 460,362 L 422,344 L 402,306 L 392,254
-               L 390,198 L 394,166 Z" fill="url(#dp)"/>
+      <!-- Data card - bottom left -->
+      <rect x="42" y="220" width="50" height="32" rx="6" fill="white" stroke="#e8e4df" stroke-width="1"/>
+      <line x1="52" y1="230" x2="82" y2="230" stroke="#d0ccc7" stroke-width="2"/>
+      <line x1="52" y1="236" x2="72" y2="236" stroke="#e8e4df" stroke-width="2"/>
+      <line x1="52" y1="242" x2="78" y2="242" stroke="#e8e4df" stroke-width="2"/>
 
-      <!-- Asia main -->
-      <path d="M 514,58 L 606,42 L 684,40 L 752,52 L 804,74 L 822,108
-               L 810,148 L 782,178 L 740,198 L 690,208 L 636,212 L 588,200
-               L 552,184 L 524,162 L 510,136 L 506,100 Z" fill="url(#dp)"/>
-      <!-- Arabia/Middle East -->
-      <path d="M 512,148 L 558,148 L 572,178 L 558,208 L 528,218 L 508,202 L 504,178 Z" fill="url(#dp)"/>
-      <!-- India -->
-      <path d="M 576,170 L 622,166 L 638,188 L 632,228 L 610,258 L 584,262
-               L 562,242 L 558,212 L 564,188 Z" fill="url(#dp)"/>
-      <!-- SE Asia peninsula -->
-      <path d="M 656,198 L 688,194 L 702,218 L 700,248 L 678,262
-               L 656,250 L 646,226 L 650,206 Z" fill="url(#dp)"/>
-      <!-- Japan -->
-      <path d="M 762,100 L 794,90 L 812,106 L 806,128 L 778,134 L 760,122 Z" fill="url(#dp)"/>
+      <!-- Plus icon - right -->
+      <circle cx="278" cy="160" r="12" fill="#0891b2" opacity="0.15" stroke="#0891b2" stroke-width="1.2"/>
+      <line x1="278" y1="153" x2="278" y2="167" stroke="#0891b2" stroke-width="1.5"/>
+      <line x1="271" y1="160" x2="285" y2="160" stroke="#0891b2" stroke-width="1.5"/>
 
-      <!-- Australia -->
-      <path d="M 680,294 L 748,280 L 804,288 L 824,318 L 818,362 L 786,378
-               L 734,382 L 694,362 L 672,332 L 670,308 Z" fill="url(#dp)"/>
-      <!-- New Zealand (small) -->
-      <path d="M 840,350 L 858,340 L 866,360 L 852,372 L 836,364 Z" fill="url(#dp)"/>
+      <!-- Connecting lines -->
+      <line x1="90" y1="100" x2="108" y2="120" stroke="#0891b2" stroke-width="0.6" opacity="0.4" stroke-dasharray="3 3"/>
+      <line x1="80" y1="170" x2="108" y2="170" stroke="#0891b2" stroke-width="0.6" opacity="0.4" stroke-dasharray="3 3"/>
+      <line x1="248" y1="100" x2="232" y2="120" stroke="#722F37" stroke-width="0.6" opacity="0.4" stroke-dasharray="3 3"/>
+      <line x1="266" y1="160" x2="232" y2="160" stroke="#0891b2" stroke-width="0.6" opacity="0.4" stroke-dasharray="3 3"/>
 
-      <!-- CONNECTION ARCS -->
-      <!-- S. America → N. America -->
-      <path d="M 216,268 Q 172,216 194,178" stroke="#3b82f6" stroke-width="2.2" fill="none" opacity="0.85"/>
-      <!-- N. America → Europe -->
-      <path d="M 208,168 Q 312,108 444,102" stroke="#3b82f6" stroke-width="2.2" fill="none" opacity="0.85"/>
-      <!-- N. America → East Asia (long arc) -->
-      <path d="M 222,158 Q 460,36 736,118" stroke="#3b82f6" stroke-width="2.2" fill="none" opacity="0.85"/>
-
-      <!-- PIN MARKERS -->
-      <!-- S. America -->
-      <circle cx="216" cy="268" r="7" fill="#3b82f6" opacity="0.25"/>
-      <circle cx="216" cy="268" r="4.5" fill="#3b82f6"/>
-      <circle cx="216" cy="268" r="2" fill="white"/>
-      <!-- N. America (east coast) -->
-      <circle cx="208" cy="168" r="7" fill="#3b82f6" opacity="0.25"/>
-      <circle cx="208" cy="168" r="4.5" fill="#3b82f6"/>
-      <circle cx="208" cy="168" r="2" fill="white"/>
-      <!-- Europe -->
-      <circle cx="444" cy="102" r="7" fill="#3b82f6" opacity="0.25"/>
-      <circle cx="444" cy="102" r="4.5" fill="#3b82f6"/>
-      <circle cx="444" cy="102" r="2" fill="white"/>
-      <!-- East Asia -->
-      <circle cx="736" cy="118" r="7" fill="#3b82f6" opacity="0.25"/>
-      <circle cx="736" cy="118" r="4.5" fill="#3b82f6"/>
-      <circle cx="736" cy="118" r="2" fill="white"/>
+      <!-- Glass panels behind phone -->
+      <rect x="90" y="90" width="160" height="40" rx="4" fill="white" opacity="0.06" transform="rotate(-3 170 110)"/>
+      <rect x="90" y="190" width="160" height="40" rx="4" fill="white" opacity="0.06" transform="rotate(2 170 210)"/>
     </svg>
   </div>
 </section>
+
+<hr class="divider">
 
 <!-- FAQ -->
 <section class="faq">
   <h2>FAQ</h2>
   <div class="faq-list">
-
     <div class="faq-item open">
       <button class="faq-q">
-        What's your investment strategy?
-        <span class="faq-icon">−</span>
+        What is your investment strategy?
+        <span class="faq-icon">&minus;</span>
       </button>
       <div class="faq-a">
-        Our expert team conducts thorough research and analysis to identify promising ICOs and cryptocurrency projects. We focus on projects with strong fundamentals, innovative technology, and significant growth potential. Our diversified investment strategy involves spreading investments across 10–15 different coins to minimize risk and maximize returns.
+        Our expert team conducts thorough research and analysis to identify promising blockchain infrastructure projects. We focus on projects with strong fundamentals, innovative technology, and significant growth potential. Our diversified investment strategy involves backing 10&ndash;15 high-conviction positions to minimize risk and maximize returns.
       </div>
     </div>
-
     <div class="faq-item">
       <button class="faq-q">
-        What security measures are in place to protect my investment?
+        What security measures are in place to protect investments?
         <span class="faq-icon">+</span>
       </button>
       <div class="faq-a">
         Security is our top priority. We use multisig wallets for all transactions, ensuring that funds can only be moved with the approval of multiple team members. Additionally, our platform and smart contracts undergo regular security audits to prevent vulnerabilities.
       </div>
     </div>
-
     <div class="faq-item">
       <button class="faq-q">
-        How can I invest in DeltaBoxx?
+        How can I invest with DeltaBoxx?
         <span class="faq-icon">+</span>
       </button>
       <div class="faq-a">
         To invest, simply sign up by whitelisting with us on our platform and you will have access to our dashboard. It provides a straightforward way to monitor investments and returns.
       </div>
     </div>
-
     <div class="faq-item">
       <button class="faq-q">
         How are profits distributed?
@@ -354,96 +376,30 @@
         Profits are distributed monthly to investors' wallets. Our platform takes a percentage share of the profits, aligning our success directly with that of our investors.
       </div>
     </div>
-
     <div class="faq-item">
       <button class="faq-q">
-        As an investor, what kind of performance can be expected?
+        What kind of performance can investors expect?
         <span class="faq-icon">+</span>
       </button>
       <div class="faq-a">
-        Our strategic approach aims to maximize gains, even through market wanes, and investors can expect monthly performance that exceeds 10%. We provide estimates based on our market analysis and past performance.
+        Our strategic approach aims to maximize gains, even through market downturns. We provide estimates based on our market analysis and past performance, with a focus on consistent, long-term value creation.
       </div>
     </div>
-
     <div class="faq-item">
       <button class="faq-q">
-        What risks are involved in cryptocurrency investments?
+        What risks are involved in digital asset investments?
         <span class="faq-icon">+</span>
       </button>
       <div class="faq-a">
-        Investing in cryptocurrencies involves risks, including market volatility, regulatory changes, and project failures. We mitigate these risks through careful selection, diversification, and constant market analysis. As traders, we place emphasis on proper stop losses and profit-taking.
+        Investing in digital assets involves risks, including market volatility, regulatory changes, and project failures. We mitigate these risks through careful selection, diversification, and constant market analysis. As active managers, we emphasize proper risk controls and position sizing.
       </div>
     </div>
-
   </div>
 </section>
 
 <footer>Copyright &copy; 2024 DeltaBoxx. All rights reserved.</footer>
 
 <script>
-// ── MESH GRADIENT ──
-(function () {
-  const c = document.getElementById('starCanvas');
-  const hero = c.parentElement;
-  function resize() { c.width = hero.offsetWidth; c.height = hero.offsetHeight; }
-  resize();
-  window.addEventListener('resize', resize);
-
-  const ctx = c.getContext('2d');
-  let t = 0;
-
-  // color blobs: [ox, oy] = base position, [ax, ay] = amplitude, [fx, fy] = frequency, color RGB, alpha, size
-  const orbs = [
-    { ox:0.30, oy:0.45, ax:0.22, ay:0.18, fx:0.70, fy:0.55, rgb:[6,182,212],   a:0.65, s:0.65 },
-    { ox:0.72, oy:0.30, ax:0.18, ay:0.22, fx:0.60, fy:0.80, rgb:[249,115,22],  a:0.55, s:0.55 },
-    { ox:0.50, oy:0.65, ax:0.25, ay:0.15, fx:0.45, fy:0.65, rgb:[8,145,178],   a:0.50, s:0.60 },
-    { ox:0.18, oy:0.70, ax:0.12, ay:0.20, fx:0.90, fy:0.40, rgb:[22,78,99],    a:0.45, s:0.50 },
-    { ox:0.85, oy:0.55, ax:0.10, ay:0.12, fx:0.75, fy:0.35, rgb:[6,182,212],   a:0.40, s:0.40 },
-  ];
-
-  // subtle stars
-  const stars = Array.from({ length: 80 }, () => ({
-    x: Math.random(), y: Math.random(),
-    r: Math.random() * 1.2 + 0.2,
-    a: Math.random(), speed: Math.random() * 0.003 + 0.001
-  }));
-
-  function draw() {
-    t += 0.004;
-    const W = c.width, H = c.height;
-
-    ctx.fillStyle = '#000';
-    ctx.fillRect(0, 0, W, H);
-
-    ctx.globalCompositeOperation = 'screen';
-    orbs.forEach((o, i) => {
-      const x = (o.ox + o.ax * Math.sin(t * o.fx + i)) * W;
-      const y = (o.oy + o.ay * Math.cos(t * o.fy + i)) * H;
-      const r = Math.max(W, H) * o.s;
-      const [rv, gv, bv] = o.rgb;
-      const g = ctx.createRadialGradient(x, y, 0, x, y, r);
-      g.addColorStop(0,   `rgba(${rv},${gv},${bv},${o.a})`);
-      g.addColorStop(0.4, `rgba(${rv},${gv},${bv},${o.a * 0.35})`);
-      g.addColorStop(1,   `rgba(${rv},${gv},${bv},0)`);
-      ctx.fillStyle = g;
-      ctx.fillRect(0, 0, W, H);
-    });
-
-    ctx.globalCompositeOperation = 'source-over';
-    stars.forEach(s => {
-      s.a += s.speed;
-      if (s.a > 1) s.a = 0;
-      ctx.beginPath();
-      ctx.arc(s.x * W, s.y * H, s.r, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(255,255,255,${s.a * 0.7})`;
-      ctx.fill();
-    });
-
-    requestAnimationFrame(draw);
-  }
-  draw();
-})();
-
 // ── FAQ ACCORDION ──
 document.querySelectorAll('.faq-q').forEach(btn => {
   btn.addEventListener('click', () => {
@@ -455,7 +411,7 @@ document.querySelectorAll('.faq-q').forEach(btn => {
     });
     if (!isOpen) {
       item.classList.add('open');
-      btn.querySelector('.faq-icon').textContent = '−';
+      btn.querySelector('.faq-icon').textContent = '\u2212';
     }
   });
 });
