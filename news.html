@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>News — DeltaBoxx</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Inter', sans-serif; color: #1a1a2e; background: #fff; }
+    a { text-decoration: none; color: inherit; }
+    :root { --burgundy: #722F37; --slate: #2D3436; --bg: #f8f6f3; --border: #e8e4df; --text: #1a1a2e; --muted: #5a5a6e; }
+
+    nav {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 18px 60px; background: #fff; border-bottom: 1px solid var(--border);
+      position: sticky; top: 0; z-index: 100;
+    }
+    .logo { display: flex; align-items: center; gap: 12px; }
+    .logo-text { font-size: 17px; font-weight: 700; letter-spacing: 3px; color: var(--burgundy); text-transform: uppercase; }
+    .nav-links { display: flex; gap: 32px; list-style: none; }
+    .nav-links a { font-size: 13px; font-weight: 500; color: #636e72; padding: 6px 0; border-bottom: 2px solid transparent; transition: all .2s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--burgundy); border-bottom-color: var(--burgundy); }
+
+    .motto { background: var(--burgundy); color: rgba(255,255,255,.85); text-align: center; padding: 13px 20px; font-size: 11px; font-weight: 500; letter-spacing: 4px; text-transform: uppercase; }
+
+    .page-hero { background: var(--bg); padding: 80px 60px; border-bottom: 1px solid var(--border); }
+    .page-hero h1 { font-size: 48px; font-weight: 800; color: var(--text); margin-bottom: 12px; }
+    .page-hero .sub { font-size: 16px; color: var(--muted); }
+
+    .news-section { max-width: 1700px; margin: 0 auto; padding: 80px 80px 100px; }
+    .section-label { font-size: 11px; font-weight: 700; letter-spacing: 4px; text-transform: uppercase; color: var(--burgundy); margin-bottom: 40px; }
+
+    .news-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+    .news-card {
+      border: 1px solid var(--border); border-radius: 6px;
+      padding: 32px; background: #fff;
+      transition: box-shadow .2s;
+    }
+    .news-card:hover { box-shadow: 0 4px 24px rgba(0,0,0,0.07); }
+    .news-date { font-size: 11px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--burgundy); margin-bottom: 14px; }
+    .news-title { font-size: 17px; font-weight: 700; color: var(--text); margin-bottom: 14px; line-height: 1.4; }
+    .news-excerpt { font-size: 14px; color: var(--muted); line-height: 1.8; }
+
+    .coming-soon {
+      text-align: center; padding: 100px 20px;
+      color: var(--muted); font-size: 15px;
+    }
+    .coming-soon .icon { font-size: 48px; margin-bottom: 20px; opacity: 0.3; }
+    .coming-soon h3 { font-size: 22px; font-weight: 700; color: var(--text); margin-bottom: 12px; }
+
+    footer { background: var(--slate); color: rgba(255,255,255,.45); padding: 28px; text-align: center; font-size: 13px; }
+
+    @media (max-width: 960px) {
+      nav { padding: 16px 24px; } .nav-links { gap: 16px; }
+      .page-hero { padding: 60px 24px; } .page-hero h1 { font-size: 36px; }
+      .news-section { padding: 60px 24px 80px; }
+      .news-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a class="logo" href="index.html">
+    <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
+      <rect width="36" height="36" rx="5" fill="#722F37"/>
+      <path d="M18 7L30 29H6Z" stroke="white" stroke-width="2.2" fill="none" stroke-linejoin="round"/>
+      <path d="M18 14L25 28H11Z" stroke="white" stroke-width="1.4" fill="none" stroke-linejoin="round"/>
+    </svg>
+    <span class="logo-text">DeltaBoxx</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="index.html#framework">Investment Framework</a></li>
+    <li><a href="venture.html">Portfolio</a></li>
+    <li><a href="news.html" class="active">News</a></li>
+    <li><a href="client-login.html">Investor Login</a></li>
+  </ul>
+</nav>
+
+<div class="motto">Infrastructure First. Everything Else Follows.</div>
+
+<div class="page-hero">
+  <h1>News</h1>
+  <p class="sub">Insights, updates, and perspectives from the DeltaBoxx team.</p>
+</div>
+
+<div class="news-section">
+  <p class="section-label">Latest</p>
+  <div class="coming-soon">
+    <div class="icon">&#9632;</div>
+    <h3>Coming Soon</h3>
+    <p>News and insights from the DeltaBoxx team will be published here.</p>
+  </div>
+</div>
+
+<footer>Copyright &copy; 2024 DeltaBoxx. All rights reserved.</footer>
+</body>
+</html>

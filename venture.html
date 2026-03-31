@@ -3,53 +3,44 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Venture — DeltaBoxx</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <title>Portfolio — DeltaBoxx</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: 'Inter', sans-serif; color: #0f172a; }
-    a { text-decoration: none; }
+    body { font-family: 'Inter', sans-serif; color: #1a1a2e; background: #fff; }
+    a { text-decoration: none; color: inherit; }
+    :root { --burgundy: #722F37; --slate: #2D3436; --bg: #f8f6f3; --border: #e8e4df; --text: #1a1a2e; --muted: #5a5a6e; }
 
-    /* ── NAV ── */
     nav {
       display: flex; align-items: center; justify-content: space-between;
-      padding: 22px 48px; background: #fff;
-      border-bottom: 1px solid #f1f5f9;
+      padding: 18px 60px; background: #fff; border-bottom: 1px solid var(--border);
+      position: sticky; top: 0; z-index: 100;
     }
-    .logo { display: flex; align-items: center; gap: 10px; color: #0f172a; font-size: 18px; font-weight: 700; }
-    .logo-box {
-      width: 34px; height: 34px; background: #2563eb;
-      border-radius: 7px; display: grid; place-items: center; flex-shrink: 0;
-    }
+    .logo { display: flex; align-items: center; gap: 12px; }
+    .logo-text { font-size: 17px; font-weight: 700; letter-spacing: 3px; color: var(--burgundy); text-transform: uppercase; }
     .nav-links { display: flex; gap: 32px; list-style: none; }
-    .nav-links a { color: #0f172a; font-size: 14px; font-weight: 500; }
-    .nav-links a:hover, .nav-links a.active { color: #2563eb; }
+    .nav-links a { font-size: 13px; font-weight: 500; color: #636e72; padding: 6px 0; border-bottom: 2px solid transparent; transition: all .2s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--burgundy); border-bottom-color: var(--burgundy); }
 
-    /* ── PAGE HEADER ── */
-    .page-header { background: #e8f0fe; padding: 64px 20px; text-align: center; }
-    .page-header h1 { font-size: 46px; font-weight: 800; color: #0f172a; }
+    .motto { background: var(--burgundy); color: rgba(255,255,255,.85); text-align: center; padding: 13px 20px; font-size: 11px; font-weight: 500; letter-spacing: 4px; text-transform: uppercase; }
 
-    /* ── COIN GRID ── */
-    .coins { max-width: 820px; margin: 0 auto; padding: 64px 20px 80px; }
-    .coin-row {
-      display: flex; justify-content: center; align-items: center;
-      gap: 28px; flex-wrap: wrap; margin-bottom: 36px;
-    }
-    .coin {
-      width: 82px; height: 82px; border-radius: 50%;
-      overflow: hidden; flex-shrink: 0;
-      background: #f1f5f9;
-    }
+    .page-hero { background: var(--bg); padding: 80px 60px; border-bottom: 1px solid var(--border); }
+    .page-hero h1 { font-size: 48px; font-weight: 800; color: var(--text); margin-bottom: 12px; }
+    .page-hero .sub { font-size: 16px; color: var(--muted); }
+
+    .coins-section { max-width: 1700px; margin: 0 auto; padding: 80px 80px 100px; }
+    .section-label { font-size: 11px; font-weight: 700; letter-spacing: 4px; text-transform: uppercase; color: var(--burgundy); margin-bottom: 40px; }
+    .coin-row { display: flex; justify-content: flex-start; align-items: center; gap: 24px; flex-wrap: wrap; margin-bottom: 32px; }
+    .coin { width: 80px; height: 80px; border-radius: 50%; overflow: hidden; flex-shrink: 0; background: var(--bg); border: 1px solid var(--border); }
     .coin img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
-    /* ── FOOTER ── */
-    footer { background: #0a0a0a; color: rgba(255,255,255,.45); padding: 28px; text-align: center; font-size: 13px; }
+    footer { background: var(--slate); color: rgba(255,255,255,.45); padding: 28px; text-align: center; font-size: 13px; }
 
-    @media (max-width: 640px) {
-      nav { padding: 18px 20px; }
-      .nav-links { gap: 16px; }
+    @media (max-width: 960px) {
+      nav { padding: 16px 24px; } .nav-links { gap: 16px; }
+      .page-hero { padding: 60px 24px; } .page-hero h1 { font-size: 36px; }
+      .coins-section { padding: 60px 24px 80px; }
       .coin { width: 60px; height: 60px; }
-      .coin-row { gap: 18px; }
     }
   </style>
 </head>
@@ -57,29 +48,33 @@
 
 <nav>
   <a class="logo" href="index.html">
-    <div class="logo-box">
-      <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-        <rect x="2" y="2" width="14" height="14" rx="2" stroke="white" stroke-width="2"/>
-        <path d="M9 5v8M5 9h8" stroke="white" stroke-width="1.8" stroke-linecap="round"/>
-      </svg>
-    </div>
-    DeltaBoxx
+    <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
+      <rect width="36" height="36" rx="5" fill="#722F37"/>
+      <path d="M18 7L30 29H6Z" stroke="white" stroke-width="2.2" fill="none" stroke-linejoin="round"/>
+      <path d="M18 14L25 28H11Z" stroke="white" stroke-width="1.4" fill="none" stroke-linejoin="round"/>
+    </svg>
+    <span class="logo-text">DeltaBoxx</span>
   </a>
   <ul class="nav-links">
     <li><a href="index.html">Home</a></li>
-    <li><a href="venture.html" class="active">Venture</a></li>
-    <li><a href="about.html">About Us</a></li>
-    <li><a href="client-login.html">Client Login</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="index.html#framework">Investment Framework</a></li>
+    <li><a href="venture.html" class="active">Portfolio</a></li>
+    <li><a href="news.html">News</a></li>
+    <li><a href="client-login.html">Investor Login</a></li>
   </ul>
 </nav>
 
-<div class="page-header">
-  <h1>Venture</h1>
+<div class="motto">Infrastructure First. Everything Else Follows.</div>
+
+<div class="page-hero">
+  <h1>Portfolio</h1>
+  <p class="sub">Digital assets and blockchain infrastructure backed by DeltaBoxx.</p>
 </div>
 
-<div class="coins">
+<div class="coins-section">
+  <p class="section-label">Current Holdings</p>
 
-  <!-- Row 1 -->
   <div class="coin-row">
     <div class="coin"><img src="https://s2.coinmarketcap.com/static/img/coins/64x64/5632.png"  alt="Arweave"></div>
     <div class="coin"><img src="https://s2.coinmarketcap.com/static/img/coins/64x64/7186.png"  alt="PancakeSwap"></div>
@@ -87,22 +82,18 @@
     <div class="coin"><img src="https://s2.coinmarketcap.com/static/img/coins/64x64/2469.png"  alt="Zilliqa"></div>
     <div class="coin"><img src="https://s2.coinmarketcap.com/static/img/coins/64x64/5994.png"  alt="Shiba Inu"></div>
     <div class="coin"><img src="https://s2.coinmarketcap.com/static/img/coins/64x64/10804.png" alt="Floki"></div>
-  </div>
-
-  <!-- Row 2 -->
-  <div class="coin-row">
     <div class="coin"><img src="https://s2.coinmarketcap.com/static/img/coins/64x64/2010.png"  alt="Cardano"></div>
+  </div>
+  <div class="coin-row">
     <div class="coin"><img src="https://s2.coinmarketcap.com/static/img/coins/64x64/4030.png"  alt="Algorand"></div>
     <div class="coin"><img src="https://s2.coinmarketcap.com/static/img/coins/64x64/5604.png"  alt="Secret Network"></div>
     <div class="coin"><img src="https://s2.coinmarketcap.com/static/img/coins/64x64/11841.png" alt="Arbitrum"></div>
     <div class="coin"><img src="https://s2.coinmarketcap.com/static/img/coins/64x64/1975.png"  alt="Chainlink"></div>
     <div class="coin"><img src="https://s2.coinmarketcap.com/static/img/coins/64x64/3794.png"  alt="Cosmos"></div>
     <div class="coin"><img src="https://s2.coinmarketcap.com/static/img/coins/64x64/24478.png" alt="Pepe"></div>
-  </div>
-
-  <!-- Row 3 -->
-  <div class="coin-row">
     <div class="coin"><img src="https://s2.coinmarketcap.com/static/img/coins/64x64/11156.png" alt="dYdX"></div>
+  </div>
+  <div class="coin-row">
     <div class="coin"><img src="https://s2.coinmarketcap.com/static/img/coins/64x64/6535.png"  alt="NEAR Protocol"></div>
     <div class="coin"><img src="https://s2.coinmarketcap.com/static/img/coins/64x64/6636.png"  alt="Polkadot"></div>
     <div class="coin"><img src="https://s2.coinmarketcap.com/static/img/coins/64x64/13502.png" alt="Worldcoin"></div>
@@ -110,10 +101,8 @@
     <div class="coin"><img src="https://s2.coinmarketcap.com/static/img/coins/64x64/2011.png"  alt="Tezos"></div>
     <div class="coin"><img src="https://s2.coinmarketcap.com/static/img/coins/64x64/23149.png" alt="Sei"></div>
   </div>
-
 </div>
 
 <footer>Copyright &copy; 2024 DeltaBoxx. All rights reserved.</footer>
-
 </body>
 </html>
