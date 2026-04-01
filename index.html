@@ -31,6 +31,34 @@
     .nav-links a { font-size: 13px; font-weight: 500; color: #636e72; padding: 6px 0; border-bottom: 2px solid transparent; transition: all .2s; }
     .nav-links a:hover, .nav-links a.active { color: var(--burgundy); border-bottom-color: var(--burgundy); }
 
+    /* ── HAMBURGER ── */
+    .hamburger {
+      display: none; flex-direction: column; justify-content: space-between;
+      width: 26px; height: 18px; background: none; border: none; cursor: pointer; padding: 0;
+    }
+    .hamburger span {
+      display: block; height: 2px; width: 100%; background: var(--burgundy);
+      border-radius: 2px; transition: all .3s;
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+    /* ── MOBILE MENU ── */
+    .mobile-menu {
+      display: none; flex-direction: column;
+      background: #fff; border-top: 1px solid var(--border);
+      padding: 16px 24px 24px;
+      position: sticky; top: 57px; z-index: 99;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      font-size: 15px; font-weight: 500; color: var(--slate);
+      padding: 13px 0; border-bottom: 1px solid var(--border);
+    }
+    .mobile-menu a:last-child { border-bottom: none; }
+    .mobile-menu a:hover { color: var(--burgundy); }
+
     /* ── MOTTO ── */
     .motto {
       background: var(--burgundy); color: rgba(255,255,255,.85);
@@ -94,10 +122,13 @@
     /* ── FOOTER ── */
     footer { background: var(--slate); color: rgba(255,255,255,.45); padding: 28px; text-align: center; font-size: 13px; }
 
-    @media (max-width: 960px) {
-      nav { padding: 16px 24px; }
-      .nav-links { gap: 16px; }
-      .section-row, .section-row.reverse { flex-direction: column; padding: 60px 24px; gap: 40px; }
+    @media (max-width: 768px) {
+      nav { padding: 16px 20px; }
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .section-row, .section-row.reverse { flex-direction: column; padding: 48px 20px; gap: 32px; }
+      .hero-content { padding: 60px 24px; }
+      .hero-text { font-size: 14px; }
     }
   </style>
 </head>
@@ -120,7 +151,19 @@
     <li><a href="news.html">News</a></li>
     <li><a href="client-login.html">Investor Login</a></li>
   </ul>
+  <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html">Home</a>
+  <a href="about.html">About</a>
+  <a href="index.html#framework">Investment Framework</a>
+  <a href="venture.html">Portfolio</a>
+  <a href="news.html">News</a>
+  <a href="client-login.html">Investor Login</a>
+</div>
 
 <div class="motto">Infrastructure First. Everything Else Follows.</div>
 
@@ -144,7 +187,7 @@
 <div class="section-wrap">
   <div class="section-row">
     <div class="section-image">
-      <img src="images/cubes.jpg" alt="Blockchain infrastructure — layered cube stack">
+      <img src="images/cubes1.jpg" alt="Blockchain infrastructure — layered cube stack">
     </div>
     <div class="section-text">
       <h2>Foundational Infrastructure</h2>
@@ -171,7 +214,7 @@
       </p>
     </div>
     <div class="section-image">
-      <img src="images/phone.jpg" alt="Digital identity and mobile security">
+      <img src="images/phone1.jpg" alt="Digital identity and mobile security">
     </div>
   </div>
 </div>
@@ -212,6 +255,7 @@
 <footer>Copyright &copy; 2024 DeltaBoxx. All rights reserved.</footer>
 
 <script>
+// FAQ accordion
 document.querySelectorAll('.faq-q').forEach(btn => {
   btn.addEventListener('click', () => {
     const item = btn.closest('.faq-item');
@@ -225,6 +269,14 @@ document.querySelectorAll('.faq-q').forEach(btn => {
       btn.querySelector('.faq-icon').textContent = '\u2212';
     }
   });
+});
+
+// Mobile hamburger
+const hamburger = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobileMenu');
+hamburger.addEventListener('click', () => {
+  hamburger.classList.toggle('open');
+  mobileMenu.classList.toggle('open');
 });
 </script>
 </body>

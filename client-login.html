@@ -21,6 +21,17 @@
     .nav-links a { font-size: 13px; font-weight: 500; color: #636e72; padding: 6px 0; border-bottom: 2px solid transparent; transition: all .2s; }
     .nav-links a:hover, .nav-links a.active { color: var(--burgundy); border-bottom-color: var(--burgundy); }
 
+    .hamburger { display: none; flex-direction: column; justify-content: space-between; width: 26px; height: 18px; background: none; border: none; cursor: pointer; padding: 0; }
+    .hamburger span { display: block; height: 2px; width: 100%; background: var(--burgundy); border-radius: 2px; transition: all .3s; }
+    .hamburger.open span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+    .mobile-menu { display: none; flex-direction: column; background: #fff; border-top: 1px solid var(--border); padding: 16px 24px 24px; position: sticky; top: 57px; z-index: 99; }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a { font-size: 15px; font-weight: 500; color: var(--slate); padding: 13px 0; border-bottom: 1px solid var(--border); }
+    .mobile-menu a:last-child { border-bottom: none; }
+    .mobile-menu a:hover { color: var(--burgundy); }
+
     .motto { background: var(--burgundy); color: rgba(255,255,255,.85); text-align: center; padding: 13px 20px; font-size: 11px; font-weight: 500; letter-spacing: 4px; text-transform: uppercase; }
 
     .login-section { flex: 1; display: flex; align-items: center; justify-content: center; padding: 60px 20px; background: var(--bg); }
@@ -59,9 +70,11 @@
 
     footer { background: var(--slate); color: rgba(255,255,255,.45); padding: 28px; text-align: center; font-size: 13px; }
 
-    @media (max-width: 960px) {
-      nav { padding: 16px 24px; } .nav-links { gap: 16px; }
-      .login-card { padding: 36px 28px; }
+    @media (max-width: 768px) {
+      nav { padding: 16px 20px; }
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .login-card { padding: 36px 24px; }
     }
   </style>
 </head>
@@ -84,7 +97,19 @@
     <li><a href="news.html">News</a></li>
     <li><a href="client-login.html" class="active">Investor Login</a></li>
   </ul>
+  <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html">Home</a>
+  <a href="about.html">About</a>
+  <a href="index.html#framework">Investment Framework</a>
+  <a href="venture.html">Portfolio</a>
+  <a href="news.html">News</a>
+  <a href="client-login.html">Investor Login</a>
+</div>
 
 <div class="motto">Infrastructure First. Everything Else Follows.</div>
 
@@ -111,6 +136,14 @@
 
 <footer>Copyright &copy; 2024 DeltaBoxx. All rights reserved.</footer>
 
+<script>
+const hamburger = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobileMenu');
+hamburger.addEventListener('click', () => {
+  hamburger.classList.toggle('open');
+  mobileMenu.classList.toggle('open');
+});
+</script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
   const SUPABASE_URL  = 'https://qubwootdatrbpyipkrvw.supabase.co';
