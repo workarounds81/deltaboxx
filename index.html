@@ -10,7 +10,8 @@
     body { font-family: 'Inter', sans-serif; color: #1a1a2e; background: #fff; }
     a { text-decoration: none; color: inherit; }
     :root {
-      --burgundy: #722F37;
+      --brand: #3b82f6;
+      --brand-dark: #2f6fda;
       --slate: #2D3436;
       --bg: #f8f6f3;
       --border: #e8e4df;
@@ -25,11 +26,11 @@
       border-bottom: 1px solid var(--border);
       position: sticky; top: 0; z-index: 100;
     }
-    .logo { display: flex; align-items: center; gap: 12px; }
-    .logo-text { font-size: 17px; font-weight: 700; letter-spacing: 3px; color: var(--burgundy); text-transform: uppercase; }
+    .logo { display: flex; align-items: center; }
+    .logo-image { height: 40px; width: auto; display: block; }
     .nav-links { display: flex; gap: 32px; list-style: none; }
     .nav-links a { font-size: 13px; font-weight: 500; color: #636e72; padding: 6px 0; border-bottom: 2px solid transparent; transition: all .2s; }
-    .nav-links a:hover, .nav-links a.active { color: var(--burgundy); border-bottom-color: var(--burgundy); }
+    .nav-links a:hover, .nav-links a.active { color: var(--brand); border-bottom-color: var(--brand); }
 
     /* ── HAMBURGER ── */
     .hamburger {
@@ -37,7 +38,7 @@
       width: 26px; height: 18px; background: none; border: none; cursor: pointer; padding: 0;
     }
     .hamburger span {
-      display: block; height: 2px; width: 100%; background: var(--burgundy);
+      display: block; height: 2px; width: 100%; background: var(--brand);
       border-radius: 2px; transition: all .3s;
     }
     .hamburger.open span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
@@ -57,11 +58,11 @@
       padding: 13px 0; border-bottom: 1px solid var(--border);
     }
     .mobile-menu a:last-child { border-bottom: none; }
-    .mobile-menu a:hover { color: var(--burgundy); }
+    .mobile-menu a:hover { color: var(--brand); }
 
     /* ── MOTTO ── */
     .motto {
-      background: var(--burgundy); color: rgba(255,255,255,.85);
+      background: var(--brand); color: rgba(255,255,255,.85);
       text-align: center; padding: 13px 20px;
       font-size: 11px; font-weight: 500; letter-spacing: 4px; text-transform: uppercase;
     }
@@ -83,7 +84,7 @@
     }
     .hero-label {
       font-size: 13px; font-weight: 600; letter-spacing: 6px;
-      text-transform: uppercase; color: var(--burgundy); margin-bottom: 36px;
+      text-transform: uppercase; color: var(--brand); margin-bottom: 36px;
     }
     .hero-text { font-size: 16px; line-height: 1.95; color: var(--muted); }
 
@@ -115,7 +116,7 @@
       background: none; border: none; cursor: pointer; text-align: left; gap: 16px;
       font-family: 'Inter', sans-serif;
     }
-    .faq-icon { font-size: 20px; color: var(--burgundy); flex-shrink: 0; }
+    .faq-icon { font-size: 20px; color: var(--brand); flex-shrink: 0; }
     .faq-a { display: none; padding: 0 26px 20px; font-size: 14px; color: var(--muted); line-height: 1.85; }
     .faq-item.open .faq-a { display: block; }
 
@@ -136,12 +137,7 @@
 
 <nav>
   <a class="logo" href="index.html">
-    <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
-      <rect width="36" height="36" rx="5" fill="#722F37"/>
-      <path d="M18 7L30 29H6Z" stroke="white" stroke-width="2.2" fill="none" stroke-linejoin="round"/>
-      <path d="M18 14L25 28H11Z" stroke="white" stroke-width="1.4" fill="none" stroke-linejoin="round"/>
-    </svg>
-    <span class="logo-text">DeltaBoxx</span>
+    <img src="images/deltaboxx.png" alt="DeltaBoxx logo" class="logo-image">
   </a>
   <ul class="nav-links">
     <li><a href="index.html" class="active">Home</a></li>
