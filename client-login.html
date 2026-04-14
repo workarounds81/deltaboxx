@@ -9,20 +9,21 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     body { font-family: 'Inter', sans-serif; color: #1a1a2e; background: #fff; min-height: 100vh; display: flex; flex-direction: column; }
     a { text-decoration: none; color: inherit; }
-    :root { --burgundy: #722F37; --slate: #2D3436; --bg: #f8f6f3; --border: #e8e4df; --text: #1a1a2e; --muted: #5a5a6e; }
+    :root { --brand: #3b82f6;
+      --brand-dark: #2f6fda; --slate: #2D3436; --bg: #f8f6f3; --border: #e8e4df; --text: #1a1a2e; --muted: #5a5a6e; }
 
     nav {
       display: flex; align-items: center; justify-content: space-between;
       padding: 18px 60px; background: #fff; border-bottom: 1px solid var(--border);
     }
-    .logo { display: flex; align-items: center; gap: 12px; }
-    .logo-text { font-size: 17px; font-weight: 700; letter-spacing: 3px; color: var(--burgundy); text-transform: uppercase; }
+    .logo { display: flex; align-items: center; }
+    .logo-image { height: 40px; width: auto; display: block; }
     .nav-links { display: flex; gap: 32px; list-style: none; }
     .nav-links a { font-size: 13px; font-weight: 500; color: #636e72; padding: 6px 0; border-bottom: 2px solid transparent; transition: all .2s; }
-    .nav-links a:hover, .nav-links a.active { color: var(--burgundy); border-bottom-color: var(--burgundy); }
+    .nav-links a:hover, .nav-links a.active { color: var(--brand); border-bottom-color: var(--brand); }
 
     .hamburger { display: none; flex-direction: column; justify-content: space-between; width: 26px; height: 18px; background: none; border: none; cursor: pointer; padding: 0; }
-    .hamburger span { display: block; height: 2px; width: 100%; background: var(--burgundy); border-radius: 2px; transition: all .3s; }
+    .hamburger span { display: block; height: 2px; width: 100%; background: var(--brand); border-radius: 2px; transition: all .3s; }
     .hamburger.open span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
     .hamburger.open span:nth-child(2) { opacity: 0; }
     .hamburger.open span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
@@ -30,9 +31,9 @@
     .mobile-menu.open { display: flex; }
     .mobile-menu a { font-size: 15px; font-weight: 500; color: var(--slate); padding: 13px 0; border-bottom: 1px solid var(--border); }
     .mobile-menu a:last-child { border-bottom: none; }
-    .mobile-menu a:hover { color: var(--burgundy); }
+    .mobile-menu a:hover { color: var(--brand); }
 
-    .motto { background: var(--burgundy); color: rgba(255,255,255,.85); text-align: center; padding: 13px 20px; font-size: 11px; font-weight: 500; letter-spacing: 4px; text-transform: uppercase; }
+    .motto { background: var(--brand); color: rgba(255,255,255,.85); text-align: center; padding: 13px 20px; font-size: 11px; font-weight: 500; letter-spacing: 4px; text-transform: uppercase; }
 
     .login-section { flex: 1; display: flex; align-items: center; justify-content: center; padding: 60px 20px; background: var(--bg); }
     .login-card {
@@ -41,7 +42,7 @@
       box-shadow: 0 4px 32px rgba(0,0,0,0.06);
       padding: 52px 48px; width: 100%; max-width: 440px;
     }
-    .login-eyebrow { font-size: 11px; font-weight: 600; letter-spacing: 4px; text-transform: uppercase; color: var(--burgundy); margin-bottom: 14px; }
+    .login-eyebrow { font-size: 11px; font-weight: 600; letter-spacing: 4px; text-transform: uppercase; color: var(--brand); margin-bottom: 14px; }
     .login-card h2 { font-size: 28px; font-weight: 800; margin-bottom: 8px; }
     .login-card .subtitle { font-size: 14px; color: var(--muted); margin-bottom: 36px; }
 
@@ -53,18 +54,18 @@
       font-size: 15px; font-family: inherit; color: var(--text);
       outline: none; transition: border-color .15s; background: #fff;
     }
-    .form-group input:focus { border-color: var(--burgundy); }
+    .form-group input:focus { border-color: var(--brand); }
 
     .btn-login {
       width: 100%; padding: 14px;
-      background: var(--burgundy); color: #fff;
+      background: var(--brand); color: #fff;
       border: none; border-radius: 4px;
       font-size: 14px; font-weight: 600; font-family: inherit;
       cursor: pointer; margin-top: 8px; letter-spacing: 1px;
       text-transform: uppercase; transition: background .2s;
     }
-    .btn-login:hover { background: #5d2730; }
-    .btn-login:disabled { background: #c4828a; cursor: not-allowed; }
+    .btn-login:hover { background: var(--brand-dark); }
+    .btn-login:disabled { background: #93c5fd; cursor: not-allowed; }
     #msg { margin-top: 16px; font-size: 13px; text-align: center; min-height: 20px; color: #dc2626; }
     #msg.success { color: #16a34a; }
 
@@ -82,12 +83,7 @@
 
 <nav>
   <a class="logo" href="index.html">
-    <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
-      <rect width="36" height="36" rx="5" fill="#722F37"/>
-      <path d="M18 7L30 29H6Z" stroke="white" stroke-width="2.2" fill="none" stroke-linejoin="round"/>
-      <path d="M18 14L25 28H11Z" stroke="white" stroke-width="1.4" fill="none" stroke-linejoin="round"/>
-    </svg>
-    <span class="logo-text">DeltaBoxx</span>
+    <img src="images/deltaboxx.png" alt="DeltaBoxx logo" class="logo-image">
   </a>
   <ul class="nav-links">
     <li><a href="index.html">Home</a></li>
