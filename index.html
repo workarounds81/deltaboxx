@@ -1,279 +1,694 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DeltaBoxx — Infrastructure First. Everything Else Follows.</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <title>DeltaBoxx — Bridging Physical & Digital Alpha</title>
+  <meta name="description" content="DeltaBoxx invests at the intersection of late-stage private capital markets and decentralized technology — Pre-IPO Tech & AI, RWA tokenization, and on-chain liquidity infrastructure.">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Tailwind (Play CDN — no build step, matches the project's CDN-first setup) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+            grotesk: ['"Space Grotesk"', 'Inter', 'sans-serif'],
+          },
+          fontWeight: {
+            300: '300', 400: '400', 500: '500',
+            600: '600', 700: '700', 800: '800', 900: '900',
+          },
+          colors: {
+            canvas:  '#070A12',
+            canvas2: '#0B0F19',
+            surface: '#121826',
+          },
+          keyframes: {
+            shake: {
+              '0%,100%': { transform: 'translateX(0)' },
+              '20%,60%': { transform: 'translateX(-7px)' },
+              '40%,80%': { transform: 'translateX(7px)' },
+            },
+            floaty: {
+              '0%,100%': { transform: 'translateY(0)' },
+              '50%':     { transform: 'translateY(-6px)' },
+            },
+          },
+          animation: {
+            shake: 'shake .4s ease-in-out',
+            floaty: 'floaty 6s ease-in-out infinite',
+          },
+        },
+      },
+    };
+  </script>
+
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: 'Inter', sans-serif; color: #1a1a2e; background: #fff; }
-    a { text-decoration: none; color: inherit; }
-    :root {
-      --brand: #3b82f6;
-      --brand-dark: #2f6fda;
-      --slate: #2D3436;
-      --bg: #f8f6f3;
-      --border: #e8e4df;
-      --text: #1a1a2e;
-      --muted: #5a5a6e;
-    }
+    /* Default to the cyan/mint glow palette mapped to Tailwind defaults:
+       cyan-500 = #06b6d4 (Private Equity) · emerald-500 = #10b981 (On-chain/RWA) */
+    html { background: #070A12; }
+    body { font-family: 'Inter', sans-serif; -webkit-font-smoothing: antialiased; }
 
-    /* ── NAV ── */
-    nav {
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 18px 60px; background: #fff;
-      border-bottom: 1px solid var(--border);
-      position: sticky; top: 0; z-index: 100;
-    }
-    .logo { display: flex; align-items: center; }
-    .logo-image { height: 40px; width: auto; display: block; }
-    .nav-links { display: flex; gap: 32px; list-style: none; }
-    .nav-links a { font-size: 13px; font-weight: 500; color: #636e72; padding: 6px 0; border-bottom: 2px solid transparent; transition: all .2s; }
-    .nav-links a:hover, .nav-links a.active { color: var(--brand); border-bottom-color: var(--brand); }
+    /* Hide scrollbar for swipeable mobile tab rows */
+    .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+    .scrollbar-hide::-webkit-scrollbar { display: none; }
 
-    /* ── HAMBURGER ── */
-    .hamburger {
-      display: none; flex-direction: column; justify-content: space-between;
-      width: 26px; height: 18px; background: none; border: none; cursor: pointer; padding: 0;
+    /* Ambient immersion canvas */
+    .immersion {
+      background:
+        radial-gradient(900px 500px at 12% -8%, rgba(6,182,212,0.16), transparent 60%),
+        radial-gradient(900px 520px at 92% 4%, rgba(16,185,129,0.13), transparent 60%),
+        linear-gradient(180deg, #070A12 0%, #0B0F19 55%, #070A12 100%);
     }
-    .hamburger span {
-      display: block; height: 2px; width: 100%; background: var(--brand);
-      border-radius: 2px; transition: all .3s;
+    .grid-veil {
+      background-image:
+        linear-gradient(rgba(148,163,184,0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(148,163,184,0.05) 1px, transparent 1px);
+      background-size: 56px 56px;
+      mask-image: radial-gradient(circle at 50% 0%, #000 0%, transparent 75%);
+      -webkit-mask-image: radial-gradient(circle at 50% 0%, #000 0%, transparent 75%);
     }
-    .hamburger.open span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
-    .hamburger.open span:nth-child(2) { opacity: 0; }
-    .hamburger.open span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+    .text-glow-cyan { text-shadow: 0 0 24px rgba(6,182,212,0.45); }
+    .text-glow-mint { text-shadow: 0 0 24px rgba(16,185,129,0.45); }
 
-    /* ── MOBILE MENU ── */
-    .mobile-menu {
-      display: none; flex-direction: column;
-      background: #fff; border-top: 1px solid var(--border);
-      padding: 16px 24px 24px;
-      position: sticky; top: 57px; z-index: 99;
-    }
-    .mobile-menu.open { display: flex; }
-    .mobile-menu a {
-      font-size: 15px; font-weight: 500; color: var(--slate);
-      padding: 13px 0; border-bottom: 1px solid var(--border);
-    }
-    .mobile-menu a:last-child { border-bottom: none; }
-    .mobile-menu a:hover { color: var(--brand); }
+    /* Scroll reveal */
+    .reveal { opacity: 0; transform: translateY(22px); transition: opacity .7s ease, transform .7s ease; }
+    .reveal.in { opacity: 1; transform: none; }
 
-    /* ── MOTTO ── */
-    .motto {
-      background: var(--brand); color: rgba(255,255,255,.85);
-      text-align: center; padding: 13px 20px;
-      font-size: 11px; font-weight: 500; letter-spacing: 4px; text-transform: uppercase;
-    }
+    /* Tab panel transition */
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; animation: panelIn .35s ease; }
+    @keyframes panelIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
 
-    /* ── HERO ── */
-    .hero {
-      position: relative; min-height: 580px;
-      display: flex; align-items: center; justify-content: center;
-      overflow: hidden;
-      background: var(--bg) url('images/planes.jpg') center/cover no-repeat;
-    }
-    .hero::before {
-      content: ''; position: absolute; inset: 0;
-      background: rgba(248,246,243,0.78);
-    }
-    .hero-content {
-      position: relative; z-index: 1;
-      text-align: center; max-width: 800px; padding: 80px 40px;
-    }
-    .hero-label {
-      font-size: 13px; font-weight: 600; letter-spacing: 6px;
-      text-transform: uppercase; color: var(--brand); margin-bottom: 36px;
-    }
-    .hero-text { font-size: 16px; line-height: 1.95; color: var(--muted); }
-
-    /* ── DIVIDER ── */
-    .divider { border: none; border-top: 1px solid var(--border); margin: 0; }
-
-    /* ── SECTIONS ── */
-    .section-wrap { max-width: 1700px; margin: 0 auto; }
-    .section-row {
-      display: flex; align-items: center; gap: 80px;
-      padding: 100px 80px;
-    }
-    .section-row.reverse { flex-direction: row-reverse; }
-    .section-image { flex: 1; display: flex; align-items: center; justify-content: center; background: #fff; }
-    .section-image img { max-width: 100%; max-height: 440px; object-fit: contain; mix-blend-mode: multiply; }
-    .section-text { flex: 1; }
-    .section-text h2 { font-size: 30px; font-weight: 800; color: var(--text); margin-bottom: 24px; }
-    .section-text p { font-size: 15px; line-height: 1.95; color: var(--muted); }
-
-    /* ── FAQ ── */
-    .faq { background: var(--bg); padding: 80px 20px; }
-    .faq h2 { text-align: center; font-size: 34px; font-weight: 800; margin-bottom: 44px; }
-    .faq-list { max-width: 860px; margin: 0 auto; display: flex; flex-direction: column; gap: 14px; }
-    .faq-item { background: #fff; border-radius: 10px; border: 1px solid var(--border); }
-    .faq-q {
-      width: 100%; padding: 20px 26px;
-      display: flex; justify-content: space-between; align-items: center;
-      font-size: 15px; font-weight: 600; color: var(--text);
-      background: none; border: none; cursor: pointer; text-align: left; gap: 16px;
-      font-family: 'Inter', sans-serif;
-    }
-    .faq-icon { font-size: 20px; color: var(--brand); flex-shrink: 0; }
-    .faq-a { display: none; padding: 0 26px 20px; font-size: 14px; color: var(--muted); line-height: 1.85; }
-    .faq-item.open .faq-a { display: block; }
-
-    /* ── FOOTER ── */
-    footer { background: var(--slate); color: rgba(255,255,255,.45); padding: 28px; text-align: center; font-size: 13px; }
-
-    @media (max-width: 768px) {
-      nav { padding: 16px 20px; }
-      .nav-links { display: none; }
-      .hamburger { display: flex; }
-      .section-row, .section-row.reverse { flex-direction: column; padding: 48px 20px; gap: 32px; }
-      .hero-content { padding: 60px 24px; }
-      .hero-text { font-size: 14px; }
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { transition: none; opacity: 1; transform: none; }
+      .tab-panel.active { animation: none; }
+      .animate-floaty { animation: none; }
     }
   </style>
+
+  <!-- No-JS fallback: never hide content behind scripts -->
+  <noscript><style>
+    .reveal { opacity: 1 !important; transform: none !important; }
+    .tab-panel { display: block !important; }
+    #lockConsole { position: static !important; }
+    #vaultContent { filter: none !important; }
+  </style></noscript>
 </head>
-<body>
 
-<nav>
-  <a class="logo" href="index.html">
-    <img src="images/deltaboxx.png" alt="DeltaBoxx logo" class="logo-image">
-  </a>
-  <ul class="nav-links">
-    <li><a href="index.html" class="active">Home</a></li>
-    <li><a href="about.html">About</a></li>
-    <li><a href="index.html#framework">Investment Framework</a></li>
-    <li><a href="venture.html">Portfolio</a></li>
-    <li><a href="news.html">News</a></li>
-    <li><a href="client-login.html">Investor Login</a></li>
-  </ul>
-  <button class="hamburger" id="hamburger" aria-label="Toggle menu">
-    <span></span><span></span><span></span>
-  </button>
-</nav>
+<body class="bg-canvas text-slate-200 antialiased selection:bg-cyan-500/30 selection:text-white overflow-x-hidden">
 
-<div class="mobile-menu" id="mobileMenu">
-  <a href="index.html">Home</a>
-  <a href="about.html">About</a>
-  <a href="index.html#framework">Investment Framework</a>
-  <a href="venture.html">Portfolio</a>
-  <a href="news.html">News</a>
-  <a href="client-login.html">Investor Login</a>
+<!-- ════════════════════════════ NAV ════════════════════════════ -->
+<header class="sticky top-0 z-50 border-b border-slate-800/70 bg-canvas/80 backdrop-blur-xl">
+  <nav class="mx-auto flex max-w-[1700px] items-center justify-between px-5 py-3.5 sm:px-8">
+    <a href="index.html" class="group flex items-center gap-3">
+      <span class="relative grid h-10 w-10 place-items-center rounded-xl border border-slate-700/70 bg-surface/70 shadow-[0_0_28px_-8px_rgba(6,182,212,0.6)]">
+        <svg width="22" height="22" viewBox="0 0 36 36" fill="none" aria-hidden="true">
+          <defs>
+            <linearGradient id="dlt" x1="0" y1="0" x2="36" y2="36" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#06b6d4"/><stop offset="1" stop-color="#10b981"/>
+            </linearGradient>
+          </defs>
+          <path d="M18 6L31 30H5Z" stroke="url(#dlt)" stroke-width="2.4" fill="none" stroke-linejoin="round"/>
+          <path d="M18 14L25 28H11Z" stroke="url(#dlt)" stroke-width="1.5" fill="none" stroke-linejoin="round"/>
+        </svg>
+      </span>
+      <span class="font-grotesk text-[17px] font-700 tracking-[0.32em] text-white">DELTABOXX</span>
+    </a>
+
+    <ul class="hidden items-center gap-8 lg:flex">
+      <li><a href="#framework" class="text-[13px] font-500 text-slate-400 transition hover:text-cyan-400">Thesis</a></li>
+      <li><a href="#flagship"  class="text-[13px] font-500 text-slate-400 transition hover:text-cyan-400">Flagship Deal</a></li>
+      <li><a href="venture.html" class="text-[13px] font-500 text-slate-400 transition hover:text-cyan-400">Portfolio</a></li>
+      <li><a href="about.html"   class="text-[13px] font-500 text-slate-400 transition hover:text-cyan-400">About</a></li>
+      <li><a href="news.html"    class="text-[13px] font-500 text-slate-400 transition hover:text-cyan-400">News</a></li>
+    </ul>
+
+    <div class="flex items-center gap-3">
+      <a href="client-login.html"
+         class="hidden min-h-[44px] items-center rounded-xl border border-cyan-500/40 bg-cyan-500/10 px-5 text-[13px] font-600 text-cyan-300 transition hover:bg-cyan-500/20 hover:text-white sm:inline-flex">
+        Node Access
+      </a>
+      <button id="hamburger" aria-label="Toggle menu" aria-expanded="false"
+              class="grid h-11 w-11 place-items-center rounded-xl border border-slate-700/70 bg-surface/60 lg:hidden">
+        <span class="relative block h-[14px] w-[20px]">
+          <span class="absolute left-0 top-0 h-0.5 w-full rounded bg-slate-200 transition-transform duration-300" data-bar="1"></span>
+          <span class="absolute left-0 top-1.5 h-0.5 w-full rounded bg-slate-200 transition-opacity duration-300" data-bar="2"></span>
+          <span class="absolute left-0 top-3 h-0.5 w-full rounded bg-slate-200 transition-transform duration-300" data-bar="3"></span>
+        </span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile menu -->
+  <div id="mobileMenu" class="hidden border-t border-slate-800/70 bg-canvas/95 px-5 py-4 lg:hidden">
+    <div class="flex flex-col">
+      <a href="#framework" class="min-h-[44px] border-b border-slate-800/60 py-3 text-[15px] font-500 text-slate-300">Thesis</a>
+      <a href="#flagship"  class="min-h-[44px] border-b border-slate-800/60 py-3 text-[15px] font-500 text-slate-300">Flagship Deal</a>
+      <a href="venture.html" class="min-h-[44px] border-b border-slate-800/60 py-3 text-[15px] font-500 text-slate-300">Portfolio</a>
+      <a href="about.html"   class="min-h-[44px] border-b border-slate-800/60 py-3 text-[15px] font-500 text-slate-300">About</a>
+      <a href="news.html"    class="min-h-[44px] border-b border-slate-800/60 py-3 text-[15px] font-500 text-slate-300">News</a>
+      <a href="#node"        class="min-h-[44px] py-3 text-[15px] font-600 text-cyan-300">Node Access</a>
+    </div>
+  </div>
+</header>
+
+<!-- Motto bar -->
+<div class="border-b border-slate-800/70 bg-gradient-to-r from-cyan-500/10 via-transparent to-emerald-500/10">
+  <p class="mx-auto max-w-[1700px] px-5 py-2.5 text-center text-[10px] font-600 uppercase tracking-[0.4em] text-slate-400 sm:text-[11px]">
+    Infrastructure First. Everything Else Follows.
+  </p>
 </div>
 
-<div class="motto">Infrastructure First. Everything Else Follows.</div>
+<main>
+<!-- ═══════════ BLOCK A · HYBRID MACRO-THESIS DASHBOARD (HERO) ═══════════ -->
+<section id="framework" class="immersion relative overflow-hidden">
+  <div class="grid-veil pointer-events-none absolute inset-0"></div>
 
-<!-- HERO: Investment Framework -->
-<section class="hero" id="framework">
-  <div class="hero-content">
-    <p class="hero-label">Investment Framework</p>
-    <p class="hero-text">
-      Deltaboxx is a venture capital firm investing in blockchain infrastructure and digital assets,
-      backing high-conviction projects across the decentralized ecosystem. We partner with visionary
-      founders to accelerate technologies that are reshaping finance, ownership, and digital
-      interaction&mdash;driving the next wave of scalable, real-world blockchain adoption and long-term
-      socioeconomic transformation.
-    </p>
+  <div class="relative mx-auto max-w-[1700px] px-5 pb-20 pt-16 sm:px-8 sm:pb-24 sm:pt-20 lg:pt-24">
+    <!-- Heading block -->
+    <div class="reveal max-w-4xl">
+      <div class="mb-6 inline-flex items-center gap-2 rounded-full border border-slate-700/70 bg-surface/50 px-4 py-1.5 backdrop-blur-xl">
+        <span class="h-1.5 w-1.5 animate-pulse rounded-full bg-emerald-400"></span>
+        <span class="text-[11px] font-600 uppercase tracking-[0.28em] text-slate-300">Hybrid Capital · Macro Thesis</span>
+      </div>
+
+      <h1 class="font-grotesk text-3xl font-700 leading-[1.08] tracking-tight text-white sm:text-4xl md:text-5xl lg:text-6xl">
+        Bridging the <span class="text-cyan-400 text-glow-cyan">physical</span> and
+        <span class="text-emerald-400 text-glow-mint">digital</span> alpha.
+      </h1>
+      <p class="mt-5 max-w-2xl text-[15px] leading-relaxed text-slate-400 sm:text-base">
+        Real-world cash-flow assets meet algorithmic speed. DeltaBoxx operates at the intersection of
+        late-stage private capital markets and decentralized technology — deploying directly into early-stage
+        Pre-IPO Tech &amp; AI, while scaling the blockchain frontier through RWA tokenization, on-chain liquidity
+        routing, and protocol-layer infrastructure.
+      </p>
+
+      <div class="mt-7 flex flex-wrap gap-3">
+        <a href="#flagship"
+           class="inline-flex min-h-[44px] items-center gap-2 rounded-xl bg-white px-6 text-[14px] font-700 text-canvas transition hover:bg-cyan-300">
+          View Flagship Deal
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <a href="#node"
+           class="inline-flex min-h-[44px] items-center gap-2 rounded-xl border border-slate-700/70 bg-surface/50 px-6 text-[14px] font-600 text-slate-200 backdrop-blur-xl transition hover:border-emerald-500/50 hover:text-white">
+          Enter Node Portal
+        </a>
+      </div>
+    </div>
+
+    <!-- Aggregate metrics strip -->
+    <div class="reveal mt-12 grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
+      <div class="rounded-2xl border border-slate-800/60 bg-surface/50 p-4 backdrop-blur-xl sm:p-5">
+        <p class="font-grotesk text-2xl font-700 text-white sm:text-3xl">$120M+</p>
+        <p class="mt-1 text-[11px] font-500 uppercase tracking-wider text-slate-500">Capital Under Mandate</p>
+      </div>
+      <div class="rounded-2xl border border-slate-800/60 bg-surface/50 p-4 backdrop-blur-xl sm:p-5">
+        <p class="font-grotesk text-2xl font-700 text-cyan-400 sm:text-3xl">2</p>
+        <p class="mt-1 text-[11px] font-500 uppercase tracking-wider text-slate-500">Deployment Tiers</p>
+      </div>
+      <div class="rounded-2xl border border-slate-800/60 bg-surface/50 p-4 backdrop-blur-xl sm:p-5">
+        <p class="font-grotesk text-2xl font-700 text-emerald-400 sm:text-3xl">14</p>
+        <p class="mt-1 text-[11px] font-500 uppercase tracking-wider text-slate-500">Active Positions</p>
+      </div>
+      <div class="rounded-2xl border border-slate-800/60 bg-surface/50 p-4 backdrop-blur-xl sm:p-5">
+        <p class="font-grotesk text-2xl font-700 text-white sm:text-3xl">24/7</p>
+        <p class="mt-1 text-[11px] font-500 uppercase tracking-wider text-slate-500">On-Chain Settlement</p>
+      </div>
+    </div>
+
+    <!-- Two-tier deployment engine -->
+    <div class="mt-6 grid grid-cols-1 gap-5 lg:mt-7 lg:grid-cols-2">
+
+      <!-- Tier 01 · Private Growth Equity (cyan) -->
+      <article class="reveal group relative overflow-hidden rounded-3xl border border-slate-800/60 bg-surface/50 p-6 backdrop-blur-xl transition duration-300 hover:border-cyan-500/50 hover:shadow-[0_0_60px_-18px_rgba(6,182,212,0.55)] sm:p-8">
+        <div class="pointer-events-none absolute -right-16 -top-16 h-44 w-44 rounded-full bg-cyan-500/20 blur-3xl transition group-hover:bg-cyan-500/30"></div>
+        <div class="relative">
+          <div class="flex items-center justify-between">
+            <span class="rounded-lg border border-cyan-500/40 bg-cyan-500/10 px-3 py-1 text-[11px] font-700 uppercase tracking-[0.2em] text-cyan-300">Tier 01</span>
+            <span class="h-2.5 w-2.5 rounded-full bg-cyan-400 shadow-[0_0_14px_2px_rgba(6,182,212,0.7)]"></span>
+          </div>
+          <h2 class="mt-5 font-grotesk text-xl font-700 text-white sm:text-2xl">Private Growth Equity</h2>
+          <p class="mt-1 text-[13px] font-600 uppercase tracking-wider text-cyan-400/90">Pre-IPO Tech &amp; AI</p>
+          <p class="mt-4 text-[14px] leading-relaxed text-slate-400">
+            Late-stage deep-tech allocations into pre-vetted corporate targets with structured exit timelines —
+            entering ahead of public listings via tightly governed SPV structures.
+          </p>
+
+          <dl class="mt-6 grid grid-cols-3 gap-3">
+            <div class="rounded-xl border border-slate-800/70 bg-canvas/50 p-3 text-center">
+              <dt class="text-[10px] font-500 uppercase tracking-wider text-slate-500">Stage</dt>
+              <dd class="mt-1 font-grotesk text-base font-700 text-white sm:text-lg">Late</dd>
+            </div>
+            <div class="rounded-xl border border-slate-800/70 bg-canvas/50 p-3 text-center">
+              <dt class="text-[10px] font-500 uppercase tracking-wider text-slate-500">Exit Horizon</dt>
+              <dd class="mt-1 font-grotesk text-base font-700 text-white sm:text-lg">12–18mo</dd>
+            </div>
+            <div class="rounded-xl border border-slate-800/70 bg-canvas/50 p-3 text-center">
+              <dt class="text-[10px] font-500 uppercase tracking-wider text-slate-500">Targets</dt>
+              <dd class="mt-1 font-grotesk text-base font-700 text-white sm:text-lg">Vetted</dd>
+            </div>
+          </dl>
+
+          <ul class="mt-6 space-y-2.5 text-[13px] text-slate-400">
+            <li class="flex gap-2.5"><span class="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-cyan-400"></span>Deep-tech &amp; frontier AI allocations</li>
+            <li class="flex gap-2.5"><span class="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-cyan-400"></span>Pre-vetted corporate targets</li>
+            <li class="flex gap-2.5"><span class="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-cyan-400"></span>Structured, governed exit timelines</li>
+          </ul>
+        </div>
+      </article>
+
+      <!-- Tier 02 · On-Chain Proving Grounds (mint) -->
+      <article class="reveal group relative overflow-hidden rounded-3xl border border-slate-800/60 bg-surface/50 p-6 backdrop-blur-xl transition duration-300 hover:border-emerald-500/50 hover:shadow-[0_0_60px_-18px_rgba(16,185,129,0.55)] sm:p-8">
+        <div class="pointer-events-none absolute -right-16 -top-16 h-44 w-44 rounded-full bg-emerald-500/20 blur-3xl transition group-hover:bg-emerald-500/30"></div>
+        <div class="relative">
+          <div class="flex items-center justify-between">
+            <span class="rounded-lg border border-emerald-500/40 bg-emerald-500/10 px-3 py-1 text-[11px] font-700 uppercase tracking-[0.2em] text-emerald-300">Tier 02</span>
+            <span class="h-2.5 w-2.5 rounded-full bg-emerald-400 shadow-[0_0_14px_2px_rgba(16,185,129,0.7)]"></span>
+          </div>
+          <h2 class="mt-5 font-grotesk text-xl font-700 text-white sm:text-2xl">On-Chain Proving Grounds</h2>
+          <p class="mt-1 text-[13px] font-600 uppercase tracking-wider text-emerald-400/90">DeFi &amp; Real World Assets</p>
+          <p class="mt-4 text-[14px] leading-relaxed text-slate-400">
+            Hard-asset yield engines tokenized directly on the ledger — routing real-world cash flow into
+            on-chain liquidity with transparent, verifiable settlement.
+          </p>
+
+          <dl class="mt-6 grid grid-cols-3 gap-3">
+            <div class="rounded-xl border border-slate-800/70 bg-canvas/50 p-3 text-center">
+              <dt class="text-[10px] font-500 uppercase tracking-wider text-slate-500">Settlement</dt>
+              <dd class="mt-1 font-grotesk text-base font-700 text-white sm:text-lg">On-Chain</dd>
+            </div>
+            <div class="rounded-xl border border-slate-800/70 bg-canvas/50 p-3 text-center">
+              <dt class="text-[10px] font-500 uppercase tracking-wider text-slate-500">Cash Flow</dt>
+              <dd class="mt-1 font-grotesk text-base font-700 text-white sm:text-lg">Monthly</dd>
+            </div>
+            <div class="rounded-xl border border-slate-800/70 bg-canvas/50 p-3 text-center">
+              <dt class="text-[10px] font-500 uppercase tracking-wider text-slate-500">Backing</dt>
+              <dd class="mt-1 font-grotesk text-base font-700 text-white sm:text-lg">Hard Asset</dd>
+            </div>
+          </dl>
+
+          <ul class="mt-6 space-y-2.5 text-[13px] text-slate-400">
+            <li class="flex gap-2.5"><span class="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-emerald-400"></span>Gold refining yield systems, tokenized</li>
+            <li class="flex gap-2.5"><span class="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-emerald-400"></span>Monthly property cash-flow streams</li>
+            <li class="flex gap-2.5"><span class="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-emerald-400"></span>On-chain liquidity routing &amp; protocol layers</li>
+          </ul>
+        </div>
+      </article>
+    </div>
+
+    <p class="reveal mt-5 text-[11px] text-slate-600">Figures are illustrative of mandate structure and do not constitute an offer or a forecast of returns.</p>
   </div>
 </section>
 
-<hr class="divider">
+<!-- ═══════════ BLOCK B · INTERACTIVE FLAGSHIP DEAL FRAME ═══════════ -->
+<section id="flagship" class="relative border-t border-slate-800/70 bg-canvas2">
+  <div class="mx-auto max-w-[1700px] px-5 py-16 sm:px-8 sm:py-20 lg:py-24">
+    <div class="reveal mb-8 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+      <div>
+        <p class="text-[11px] font-700 uppercase tracking-[0.3em] text-cyan-400">Flagship Deal · Live SPV</p>
+        <h2 class="mt-2 font-grotesk text-2xl font-700 tracking-tight text-white sm:text-3xl md:text-4xl">LimX Dynamics</h2>
+        <p class="mt-1 text-[14px] text-slate-400">Pre-IPO humanoid robotics &amp; agentic OS — late-stage growth equity.</p>
+      </div>
+      <span class="inline-flex w-fit items-center gap-2 rounded-full border border-emerald-500/40 bg-emerald-500/10 px-3.5 py-1.5 text-[12px] font-600 text-emerald-300">
+        <span class="h-1.5 w-1.5 animate-pulse rounded-full bg-emerald-400"></span> Allocation Open
+      </span>
+    </div>
 
-<!-- FOUNDATIONAL INFRASTRUCTURE -->
-<div class="section-wrap">
-  <div class="section-row">
-    <div class="section-image">
-      <img src="images/cubes1.jpg" alt="Blockchain infrastructure — layered cube stack">
-    </div>
-    <div class="section-text">
-      <h2>Foundational Infrastructure</h2>
-      <p>
-        We invest in the base layers of the decentralized stack&mdash;protocols, infrastructure, and
-        tooling that enable trust-minimized systems at scale. These are the primitives that redefine
-        how value moves, how systems coordinate, and how the internet operates.
-      </p>
-    </div>
-  </div>
-</div>
+    <div class="reveal overflow-hidden rounded-3xl border border-slate-800/60 bg-surface/50 backdrop-blur-xl">
+      <!-- Progress tracker -->
+      <div class="border-b border-slate-800/60 p-6 sm:p-8">
+        <div class="flex flex-wrap items-end justify-between gap-2">
+          <p class="text-[13px] font-600 uppercase tracking-wider text-slate-400">Pool Allocation Filled</p>
+          <p class="font-grotesk text-sm font-600 text-slate-300">
+            <span class="text-cyan-400">$6.4M</span> / $10M Target SPV Size
+          </p>
+        </div>
+        <div class="mt-3 flex items-center gap-4">
+          <div class="relative h-3 flex-1 overflow-hidden rounded-full bg-canvas ring-1 ring-inset ring-slate-800">
+            <div id="progressBar"
+                 class="absolute inset-y-0 left-0 w-0 rounded-full bg-gradient-to-r from-cyan-500 to-emerald-400 shadow-[0_0_18px_rgba(6,182,212,0.6)] transition-[width] duration-1000 ease-out"></div>
+          </div>
+          <span class="font-grotesk text-xl font-700 text-white sm:text-2xl">64%</span>
+        </div>
+      </div>
 
-<hr class="divider">
+      <!-- Quick-tabs (swipeable on mobile) -->
+      <div class="border-b border-slate-800/60 px-3 pt-3 sm:px-6">
+        <div role="tablist" aria-label="Deal data tabs"
+             class="scrollbar-hide flex gap-2 overflow-x-auto whitespace-nowrap pb-3">
+          <button role="tab" data-tab="t1" aria-selected="true"
+                  class="deal-tab min-h-[44px] flex-shrink-0 rounded-xl border border-cyan-500/50 bg-cyan-500/15 px-5 text-[13px] font-600 text-cyan-200 transition">
+            Target Parameters
+          </button>
+          <button role="tab" data-tab="t2" aria-selected="false"
+                  class="deal-tab min-h-[44px] flex-shrink-0 rounded-xl border border-slate-700/60 bg-transparent px-5 text-[13px] font-600 text-slate-400 transition hover:text-slate-200">
+            Strategic Moat
+          </button>
+          <button role="tab" data-tab="t3" aria-selected="false"
+                  class="deal-tab min-h-[44px] flex-shrink-0 rounded-xl border border-slate-700/60 bg-transparent px-5 text-[13px] font-600 text-slate-400 transition hover:text-slate-200">
+            Product Portfolio
+          </button>
+        </div>
+      </div>
 
-<!-- DIGITAL OWNERSHIP & IDENTITY -->
-<div class="section-wrap">
-  <div class="section-row reverse">
-    <div class="section-text">
-      <h2>Digital Ownership &amp; Identity</h2>
-      <p>
-        We back systems that shift control from platforms to users&mdash;where identity, data, and
-        assets are owned, portable, and composable. This unlocks a new internet where users, not
-        intermediaries, capture the value they create.
-      </p>
-    </div>
-    <div class="section-image">
-      <img src="images/phone1.jpg" alt="Digital identity and mobile security">
-    </div>
-  </div>
-</div>
+      <!-- Tab panels -->
+      <div class="p-6 sm:p-8">
+        <!-- Tab 1 · Target Parameters -->
+        <div id="t1" class="tab-panel active" role="tabpanel">
+          <div class="grid grid-cols-1 gap-4 md:grid-cols-3">
+            <div class="rounded-2xl border border-slate-800/70 bg-canvas/50 p-5">
+              <p class="text-[11px] font-500 uppercase tracking-wider text-slate-500">Entry Valuation</p>
+              <p class="mt-2 font-grotesk text-2xl font-700 text-cyan-400 sm:text-3xl">$1.5B–$2.0B</p>
+              <p class="mt-1 text-[12px] text-slate-500">Current round secondary entry band</p>
+            </div>
+            <div class="rounded-2xl border border-slate-800/70 bg-canvas/50 p-5">
+              <p class="text-[11px] font-500 uppercase tracking-wider text-slate-500">Target IPO Valuation</p>
+              <p class="mt-2 font-grotesk text-2xl font-700 text-emerald-400 sm:text-3xl">$3.0B–$5.0B</p>
+              <p class="mt-1 text-[12px] text-slate-500">Projected listing valuation band</p>
+            </div>
+            <div class="rounded-2xl border border-slate-800/70 bg-canvas/50 p-5">
+              <p class="text-[11px] font-500 uppercase tracking-wider text-slate-500">Listing Horizon</p>
+              <p class="mt-2 font-grotesk text-2xl font-700 text-white sm:text-3xl">12–18mo</p>
+              <p class="mt-1 text-[12px] text-slate-500">Targeted HKEX listing window</p>
+            </div>
+          </div>
+          <div class="mt-4 flex items-center gap-3 rounded-2xl border border-cyan-500/20 bg-cyan-500/[0.06] p-4 text-[13px] text-slate-300">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" class="flex-shrink-0 text-cyan-400"><path d="M12 8v5m0 3h.01M12 3l9 16H3z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Implied multiple of ~2.0–2.5× across the structured exit window, subject to listing conditions.
+          </div>
+        </div>
 
-<hr class="divider">
+        <!-- Tab 2 · Strategic Moat -->
+        <div id="t2" class="tab-panel" role="tabpanel">
+          <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+            <div class="rounded-2xl border border-slate-800/70 bg-canvas/50 p-5">
+              <p class="text-[11px] font-500 uppercase tracking-wider text-slate-500">Academic IP Foundation</p>
+              <p class="mt-2 font-grotesk text-2xl font-700 text-white sm:text-3xl">130+</p>
+              <p class="mt-1 text-[12px] text-slate-500">Peer-reviewed research papers underpinning the platform</p>
+            </div>
+            <div class="rounded-2xl border border-slate-800/70 bg-canvas/50 p-5">
+              <p class="text-[11px] font-500 uppercase tracking-wider text-slate-500">Lead Strategic Backer</p>
+              <p class="mt-2 font-grotesk text-2xl font-700 text-emerald-400 sm:text-3xl">18.7%</p>
+              <p class="mt-1 text-[12px] text-slate-500">Alibaba strategic equity stake</p>
+            </div>
+          </div>
+          <p class="mt-5 text-[12px] font-500 uppercase tracking-wider text-slate-500">Strategic Venture Backers</p>
+          <div class="mt-3 flex flex-wrap gap-2.5">
+            <span class="rounded-xl border border-slate-700/60 bg-surface/60 px-4 py-2.5 text-[13px] font-600 text-slate-200">Alibaba <span class="text-emerald-400">· 18.7%</span></span>
+            <span class="rounded-xl border border-slate-700/60 bg-surface/60 px-4 py-2.5 text-[13px] font-600 text-slate-200">JD.com</span>
+            <span class="rounded-xl border border-slate-700/60 bg-surface/60 px-4 py-2.5 text-[13px] font-600 text-slate-200">SAIC Motor</span>
+          </div>
+        </div>
 
-<!-- FAQ -->
-<section class="faq">
-  <h2>FAQ</h2>
-  <div class="faq-list">
-    <div class="faq-item open">
-      <button class="faq-q">What is your investment strategy?<span class="faq-icon">&minus;</span></button>
-      <div class="faq-a">Our expert team conducts thorough research and analysis to identify promising blockchain infrastructure projects. We focus on projects with strong fundamentals, innovative technology, and significant growth potential. Our diversified investment strategy involves backing 10–15 high-conviction positions to minimize risk and maximize returns.</div>
-    </div>
-    <div class="faq-item">
-      <button class="faq-q">What security measures protect investments?<span class="faq-icon">+</span></button>
-      <div class="faq-a">Security is our top priority. We use multisig wallets for all transactions, ensuring funds can only be moved with approval from multiple team members. Our platform and smart contracts undergo regular security audits to prevent vulnerabilities.</div>
-    </div>
-    <div class="faq-item">
-      <button class="faq-q">How can I invest with DeltaBoxx?<span class="faq-icon">+</span></button>
-      <div class="faq-a">To invest, sign up by whitelisting with us on our platform and you will gain access to your investor dashboard, providing a straightforward way to monitor investments and returns.</div>
-    </div>
-    <div class="faq-item">
-      <button class="faq-q">How are profits distributed?<span class="faq-icon">+</span></button>
-      <div class="faq-a">Profits are distributed monthly to investors' wallets. Our platform takes a percentage share of the profits, aligning our success directly with that of our investors.</div>
-    </div>
-    <div class="faq-item">
-      <button class="faq-q">What performance can investors expect?<span class="faq-icon">+</span></button>
-      <div class="faq-a">Our strategic approach aims to maximize gains even through market downturns. We provide estimates based on market analysis and past performance, with a focus on consistent, long-term value creation.</div>
-    </div>
-    <div class="faq-item">
-      <button class="faq-q">What risks are involved in digital asset investments?<span class="faq-icon">+</span></button>
-      <div class="faq-a">Investing in digital assets involves risks including market volatility, regulatory changes, and project failures. We mitigate these through careful selection, diversification, and constant market analysis, with emphasis on proper risk controls and position sizing.</div>
+        <!-- Tab 3 · Product Portfolio -->
+        <div id="t3" class="tab-panel" role="tabpanel">
+          <div class="grid grid-cols-1 gap-4 lg:grid-cols-3">
+            <div class="rounded-2xl border border-cyan-500/30 bg-canvas/50 p-5">
+              <p class="text-[11px] font-700 uppercase tracking-wider text-cyan-400">Software Layer</p>
+              <h3 class="mt-2 font-grotesk text-lg font-700 text-white">COSA Agentic OS</h3>
+              <p class="mt-1 text-[12px] font-600 text-slate-400">“The Android of Robotics”</p>
+              <p class="mt-3 text-[13px] leading-relaxed text-slate-400">An open agentic operating-system layer designed to standardize control across heterogeneous robotics fleets.</p>
+            </div>
+            <div class="rounded-2xl border border-slate-800/70 bg-canvas/50 p-5">
+              <p class="text-[11px] font-700 uppercase tracking-wider text-emerald-400">Hardware</p>
+              <h3 class="mt-2 font-grotesk text-lg font-700 text-white">Oli Humanoid</h3>
+              <p class="mt-1 text-[12px] font-600 text-slate-400">Full-size humanoid platform</p>
+              <p class="mt-3 text-[13px] leading-relaxed text-slate-400">Proprietary humanoid hardware engineered for general-purpose manipulation and locomotion.</p>
+            </div>
+            <div class="rounded-2xl border border-slate-800/70 bg-canvas/50 p-5">
+              <p class="text-[11px] font-700 uppercase tracking-wider text-emerald-400">Hardware</p>
+              <h3 class="mt-2 font-grotesk text-lg font-700 text-white">TRON 2</h3>
+              <p class="mt-1 text-[12px] font-600 text-slate-400">Next-gen mobility fleet</p>
+              <p class="mt-3 text-[13px] leading-relaxed text-slate-400">Dynamic-balance robotics unit extending the proprietary hardware lineup into commercial deployment.</p>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<footer>Copyright &copy; 2024 DeltaBoxx. All rights reserved.</footer>
+<!-- ═══════════ BLOCK C · GATED MULTI-SIG PORTAL WALL ═══════════ -->
+<section id="node" class="relative border-t border-slate-800/70 bg-canvas">
+  <div class="mx-auto max-w-[1700px] px-5 py-16 sm:px-8 sm:py-20 lg:py-24">
+    <div class="reveal mb-8 text-center">
+      <p class="text-[11px] font-700 uppercase tracking-[0.3em] text-emerald-400">Restricted Access</p>
+      <h2 class="mt-2 font-grotesk text-2xl font-700 tracking-tight text-white sm:text-3xl md:text-4xl">The Node Portal</h2>
+      <p class="mx-auto mt-2 max-w-xl text-[14px] text-slate-400">Private deal sheets, returns-scenario heatmaps, and downloadable data rooms — secured behind multi-sig governance.</p>
+    </div>
+
+    <div class="reveal relative overflow-hidden rounded-3xl border border-slate-800/60 bg-surface/40 p-4 backdrop-blur-xl sm:p-6 md:p-10">
+
+      <!-- Blurred / locked vault content -->
+      <div id="vaultContent" class="pointer-events-none select-none blur-md transition-all duration-700 ease-out">
+        <div class="grid grid-cols-1 gap-4 lg:grid-cols-3">
+          <!-- Returns scenario heatmap -->
+          <div class="rounded-2xl border border-slate-800/70 bg-canvas/60 p-5">
+            <p class="text-[12px] font-600 uppercase tracking-wider text-slate-400">Returns Scenario Heatmap</p>
+            <div class="mt-4 grid grid-cols-5 gap-1.5" id="heatmap"><!-- cells injected by JS --></div>
+            <div class="mt-3 flex justify-between text-[10px] text-slate-500"><span>Bear</span><span>Base</span><span>Bull</span></div>
+          </div>
+          <!-- Lockup schedule -->
+          <div class="rounded-2xl border border-slate-800/70 bg-canvas/60 p-5">
+            <p class="text-[12px] font-600 uppercase tracking-wider text-slate-400">Lockup Schedule</p>
+            <div class="mt-4 space-y-2.5 text-[13px]">
+              <div class="flex justify-between border-b border-slate-800/60 pb-2"><span class="text-slate-400">Cliff</span><span class="font-grotesk font-600 text-white">6 months</span></div>
+              <div class="flex justify-between border-b border-slate-800/60 pb-2"><span class="text-slate-400">Vest Tranche A</span><span class="font-grotesk font-600 text-white">25% · M6</span></div>
+              <div class="flex justify-between border-b border-slate-800/60 pb-2"><span class="text-slate-400">Vest Tranche B</span><span class="font-grotesk font-600 text-white">50% · M12</span></div>
+              <div class="flex justify-between"><span class="text-slate-400">Liquidity Event</span><span class="font-grotesk font-600 text-emerald-400">IPO / M18</span></div>
+            </div>
+          </div>
+          <!-- Risk factors -->
+          <div class="rounded-2xl border border-slate-800/70 bg-canvas/60 p-5">
+            <p class="text-[12px] font-600 uppercase tracking-wider text-slate-400">Risk Factor Register</p>
+            <ul class="mt-4 space-y-2 text-[13px] text-slate-400">
+              <li class="flex gap-2"><span class="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-amber-400"></span>Listing timeline / regulatory variance</li>
+              <li class="flex gap-2"><span class="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-amber-400"></span>Secondary liquidity constraints</li>
+              <li class="flex gap-2"><span class="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-rose-400"></span>Valuation compression scenarios</li>
+              <li class="flex gap-2"><span class="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-rose-400"></span>FX &amp; cross-border settlement</li>
+            </ul>
+          </div>
+        </div>
+        <!-- Data room downloads -->
+        <div class="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-3">
+          <div class="flex items-center gap-3 rounded-2xl border border-slate-800/70 bg-canvas/60 p-4 text-[13px] font-600 text-slate-300"><span class="grid h-9 w-9 place-items-center rounded-lg bg-cyan-500/15 text-cyan-300">PDF</span> Deal Sheet · LimX SPV</div>
+          <div class="flex items-center gap-3 rounded-2xl border border-slate-800/70 bg-canvas/60 p-4 text-[13px] font-600 text-slate-300"><span class="grid h-9 w-9 place-items-center rounded-lg bg-emerald-500/15 text-emerald-300">XLS</span> Returns Model · v3</div>
+          <div class="flex items-center gap-3 rounded-2xl border border-slate-800/70 bg-canvas/60 p-4 text-[13px] font-600 text-slate-300"><span class="grid h-9 w-9 place-items-center rounded-lg bg-slate-500/20 text-slate-300">ZIP</span> Full Data Room</div>
+        </div>
+      </div>
+
+      <!-- Lock console overlay -->
+      <div id="lockConsole" class="absolute inset-0 grid place-items-center bg-canvas/55 p-4 backdrop-blur-[2px] transition-opacity duration-500">
+        <div id="lockCard" class="w-full max-w-md rounded-3xl border border-slate-700/70 bg-surface/80 p-6 text-center shadow-[0_0_80px_-20px_rgba(6,182,212,0.5)] backdrop-blur-2xl sm:p-8">
+          <div class="mx-auto grid h-14 w-14 place-items-center rounded-2xl border border-emerald-500/40 bg-emerald-500/10">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" class="text-emerald-300"><path d="M7 10V7a5 5 0 0110 0v3m-9 0h8a2 2 0 012 2v6a2 2 0 01-2 2H8a2 2 0 01-2-2v-6a2 2 0 012-2z" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <p class="mt-4 inline-flex items-center gap-1.5 rounded-full border border-slate-700/70 bg-canvas/60 px-3 py-1 text-[11px] font-700 uppercase tracking-[0.2em] text-emerald-300">🔒 Node Exclusive</p>
+          <h3 class="mt-4 font-grotesk text-xl font-700 text-white">Restricted Access</h3>
+          <p class="mt-2 text-[13px] leading-relaxed text-slate-400">Restricted to Accredited Allocators and DAO Governance Nodes. Supply your node passkey to decrypt the deal room.</p>
+
+          <form id="vaultForm" class="mt-6" autocomplete="off">
+            <label for="vaultKey" class="sr-only">Node passkey</label>
+            <div class="flex flex-col gap-2.5 sm:flex-row">
+              <input id="vaultKey" type="password" inputmode="text" placeholder="Enter node passkey"
+                     class="min-h-[48px] flex-1 rounded-xl border border-slate-700/70 bg-canvas/70 px-4 text-[14px] text-white placeholder:text-slate-500 outline-none transition focus:border-cyan-500/60 focus:ring-2 focus:ring-cyan-500/30">
+              <button type="submit"
+                      class="min-h-[48px] rounded-xl bg-gradient-to-r from-cyan-500 to-emerald-400 px-6 text-[14px] font-700 text-canvas transition hover:brightness-110">
+                Decrypt
+              </button>
+            </div>
+            <p id="vaultError" class="mt-3 hidden text-[12px] font-600 text-rose-400">Invalid passkey — access denied. Verify your node credentials.</p>
+            <p class="mt-3 text-[11px] text-slate-600">Demo passkey: <span class="font-grotesk text-slate-400">deltaboxx-node</span> · client-side gate for preview only.</p>
+          </form>
+        </div>
+      </div>
+
+      <!-- Unlocked banner (hidden until success) -->
+      <div id="unlockBanner" class="absolute left-1/2 top-4 z-10 hidden -translate-x-1/2">
+        <span class="inline-flex items-center gap-2 rounded-full border border-emerald-500/50 bg-emerald-500/15 px-4 py-2 text-[12px] font-700 text-emerald-300 backdrop-blur-xl">
+          <span class="h-1.5 w-1.5 rounded-full bg-emerald-400"></span> Vault decrypted · Node verified
+        </span>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- ════════════════════════════ FOOTER ════════════════════════════ -->
+<footer class="border-t border-slate-800/70 bg-canvas2">
+  <div class="mx-auto max-w-[1700px] px-5 py-12 sm:px-8">
+    <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
+      <div class="sm:col-span-2 lg:col-span-1">
+        <div class="flex items-center gap-3">
+          <span class="grid h-9 w-9 place-items-center rounded-xl border border-slate-700/70 bg-surface/70">
+            <svg width="18" height="18" viewBox="0 0 36 36" fill="none" aria-hidden="true">
+              <path d="M18 6L31 30H5Z" stroke="url(#dlt)" stroke-width="2.4" fill="none" stroke-linejoin="round"/>
+            </svg>
+          </span>
+          <span class="font-grotesk text-[15px] font-700 tracking-[0.28em] text-white">DELTABOXX</span>
+        </div>
+        <p class="mt-4 max-w-xs text-[13px] leading-relaxed text-slate-500">Bridging physical and digital alpha — late-stage private capital markets meet decentralized technology.</p>
+      </div>
+
+      <div>
+        <p class="text-[11px] font-700 uppercase tracking-[0.2em] text-slate-500">Navigate</p>
+        <ul class="mt-4 space-y-2.5 text-[14px] text-slate-400">
+          <li><a href="#framework" class="transition hover:text-cyan-400">Macro Thesis</a></li>
+          <li><a href="#flagship" class="transition hover:text-cyan-400">Flagship Deal</a></li>
+          <li><a href="venture.html" class="transition hover:text-cyan-400">Portfolio</a></li>
+          <li><a href="about.html" class="transition hover:text-cyan-400">About</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <p class="text-[11px] font-700 uppercase tracking-[0.2em] text-slate-500">Access</p>
+        <ul class="mt-4 space-y-2.5 text-[14px] text-slate-400">
+          <li><a href="client-login.html" class="transition hover:text-cyan-400">Investor Login</a></li>
+          <li><a href="#node" class="transition hover:text-cyan-400">Node Portal</a></li>
+          <li><a href="whitepaper.html" class="transition hover:text-cyan-400">Whitepaper</a></li>
+          <li><a href="news.html" class="transition hover:text-cyan-400">News</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <p class="text-[11px] font-700 uppercase tracking-[0.2em] text-slate-500">DBXX Token</p>
+        <p class="mt-4 text-[13px] text-slate-400">Supply: <span class="font-grotesk text-slate-300">10,000,000,000</span></p>
+        <p class="mt-2 text-[11px] font-500 uppercase tracking-wider text-slate-500">Contract</p>
+        <p class="mt-1 break-all rounded-lg border border-slate-800/70 bg-surface/50 px-3 py-2 font-grotesk text-[11px] text-slate-400">JDw1kcaKr66GPeP8jhzMkmCTgDaugPGJt4qS7jeKZL2E</p>
+      </div>
+    </div>
+
+    <div class="mt-10 flex flex-col items-center justify-between gap-3 border-t border-slate-800/60 pt-6 sm:flex-row">
+      <p class="text-[12px] text-slate-600">© 2026 DeltaBoxx. All rights reserved.</p>
+      <p class="text-[11px] uppercase tracking-[0.3em] text-slate-600">Infrastructure First. Everything Else Follows.</p>
+    </div>
+  </div>
+</footer>
 
 <script>
-// FAQ accordion
-document.querySelectorAll('.faq-q').forEach(btn => {
+/* ── Mobile menu ── */
+(function () {
+  const btn = document.getElementById('hamburger');
+  const menu = document.getElementById('mobileMenu');
+  const bars = btn.querySelectorAll('[data-bar]');
+  const setBars = (open) => {
+    bars[0].classList.toggle('translate-y-1.5', open);
+    bars[0].classList.toggle('rotate-45', open);
+    bars[1].classList.toggle('opacity-0', open);
+    bars[2].classList.toggle('-translate-y-1.5', open);
+    bars[2].classList.toggle('-rotate-45', open);
+  };
   btn.addEventListener('click', () => {
-    const item = btn.closest('.faq-item');
-    const isOpen = item.classList.contains('open');
-    document.querySelectorAll('.faq-item').forEach(i => {
-      i.classList.remove('open');
-      i.querySelector('.faq-icon').textContent = '+';
+    const open = menu.classList.toggle('hidden') === false;
+    btn.setAttribute('aria-expanded', String(open));
+    setBars(open);
+  });
+  menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    menu.classList.add('hidden');
+    btn.setAttribute('aria-expanded', 'false');
+    setBars(false);
+  }));
+})();
+
+/* ── Progress bar fill on view ── */
+(function () {
+  const bar = document.getElementById('progressBar');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { bar.style.width = '64%'; io.disconnect(); } });
+  }, { threshold: 0.4 });
+  io.observe(bar);
+})();
+
+/* ── Flagship deal tabs ── */
+(function () {
+  const tabs = document.querySelectorAll('.deal-tab');
+  const panels = document.querySelectorAll('.tab-panel');
+  const activate = {
+    on:  ['border-cyan-500/50','bg-cyan-500/15','text-cyan-200'],
+    off: ['border-slate-700/60','bg-transparent','text-slate-400'],
+  };
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      tabs.forEach(t => {
+        const sel = t === tab;
+        t.setAttribute('aria-selected', String(sel));
+        activate.on.forEach(c => t.classList.toggle(c, sel));
+        activate.off.forEach(c => t.classList.toggle(c, !sel));
+      });
+      panels.forEach(p => p.classList.toggle('active', p.id === tab.dataset.tab));
     });
-    if (!isOpen) {
-      item.classList.add('open');
-      btn.querySelector('.faq-icon').textContent = '\u2212';
+  });
+})();
+
+/* ── Returns scenario heatmap (decorative cells) ── */
+(function () {
+  const grid = document.getElementById('heatmap');
+  if (!grid) return;
+  const palette = [
+    'bg-rose-500/30','bg-rose-500/20','bg-amber-500/30','bg-emerald-500/30','bg-emerald-500/50',
+    'bg-rose-500/20','bg-amber-500/20','bg-emerald-500/20','bg-emerald-500/40','bg-emerald-500/60',
+    'bg-amber-500/20','bg-emerald-500/20','bg-emerald-500/40','bg-emerald-500/60','bg-cyan-500/60',
+    'bg-emerald-500/20','bg-emerald-500/40','bg-emerald-500/60','bg-cyan-500/50','bg-cyan-500/70',
+  ];
+  palette.forEach(c => {
+    const cell = document.createElement('div');
+    cell.className = 'h-7 rounded ' + c;
+    grid.appendChild(cell);
+  });
+})();
+
+/* ── Node portal: client-side passkey gate (preview only) ──
+   NOTE: This is a front-end demo gate, NOT real security. Anyone can read
+   the passkey in the source. Wire to real auth (client-login.html / Supabase)
+   before exposing genuinely private material. */
+(function () {
+  const NODE_PASSKEY = 'deltaboxx-node';
+  const form    = document.getElementById('vaultForm');
+  const input   = document.getElementById('vaultKey');
+  const vault   = document.getElementById('vaultContent');
+  const console_ = document.getElementById('lockConsole');
+  const card    = document.getElementById('lockCard');
+  const error   = document.getElementById('vaultError');
+  const banner  = document.getElementById('unlockBanner');
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    if (input.value.trim().toLowerCase() === NODE_PASSKEY) {
+      vault.classList.remove('blur-md','pointer-events-none','select-none');
+      console_.classList.add('opacity-0');
+      setTimeout(() => console_.classList.add('hidden'), 500);
+      banner.classList.remove('hidden');
+      error.classList.add('hidden');
+    } else {
+      error.classList.remove('hidden');
+      card.classList.remove('animate-shake'); void card.offsetWidth;
+      card.classList.add('animate-shake');
+      input.value = '';
+      input.focus();
     }
   });
-});
+})();
 
-// Mobile hamburger
-const hamburger = document.getElementById('hamburger');
-const mobileMenu = document.getElementById('mobileMenu');
-hamburger.addEventListener('click', () => {
-  hamburger.classList.toggle('open');
-  mobileMenu.classList.toggle('open');
-});
+/* ── Scroll reveal (with no-IO + failsafe so content is never stuck hidden) ── */
+(function () {
+  const els = document.querySelectorAll('.reveal');
+  const showAll = () => els.forEach(el => el.classList.add('in'));
+  if (!('IntersectionObserver' in window)) { showAll(); return; }
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.1, rootMargin: '0px 0px 80px 0px' });
+  els.forEach(el => io.observe(el));
+  // Bulletproof failsafe: reveal anything still hidden after 4s.
+  setTimeout(showAll, 4000);
+})();
 </script>
 </body>
 </html>
