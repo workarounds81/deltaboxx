@@ -91,9 +91,44 @@
 <!-- Content -->
 <main class="mx-auto max-w-[1700px] px-5 py-16 sm:px-8 sm:py-20">
 
-  <p class="mb-10 text-[11px] font-700 uppercase tracking-[0.32em] text-burg">Current Holdings</p>
+  <!-- Completed Deals -->
+  <div class="mb-20">
+    <p class="mb-8 text-[11px] font-700 uppercase tracking-[0.32em] text-burg text-center">Completed Deals</p>
+    <div class="flex flex-col items-center gap-6 sm:flex-row sm:justify-center">
 
-  <div class="flex flex-wrap gap-4 mb-8">
+      <!-- Lightnet -->
+      <div class="flex w-full max-w-sm flex-col items-center gap-5 rounded-2xl border border-stone-200 bg-white px-8 py-8 text-center shadow-sm">
+        <img src="images/lightnet.png" alt="Lightnet" class="h-14 w-auto object-contain">
+        <div>
+          <div class="mb-1 inline-flex items-center gap-1.5 rounded-full bg-emerald-50 px-3 py-1 text-[11px] font-700 uppercase tracking-widest text-emerald-700">
+            <span class="h-1.5 w-1.5 rounded-full bg-emerald-500"></span> Completed
+          </div>
+          <h3 class="font-grotesk mt-3 text-[17px] font-700 text-ink">Lightnet</h3>
+          <p class="mt-1 text-[13px] font-600 text-burg">$3M Raised &mdash; Series A S.A.F.E</p>
+          <p class="mt-3 text-[13px] leading-relaxed text-stone-500">DeltaBoxx participated in Lightnet's Series A financing via a Simple Agreement for Future Equity, backing the company's vision to modernise cross-border payment infrastructure across Southeast Asia.</p>
+        </div>
+      </div>
+
+      <!-- Velo -->
+      <div class="flex w-full max-w-sm flex-col items-center gap-5 rounded-2xl border border-stone-200 bg-white px-8 py-8 text-center shadow-sm">
+        <img src="images/Velo.png" alt="Velo" class="h-14 w-auto object-contain">
+        <div>
+          <div class="mb-1 inline-flex items-center gap-1.5 rounded-full bg-emerald-50 px-3 py-1 text-[11px] font-700 uppercase tracking-widest text-emerald-700">
+            <span class="h-1.5 w-1.5 rounded-full bg-emerald-500"></span> Completed
+          </div>
+          <h3 class="font-grotesk mt-3 text-[17px] font-700 text-ink">Velo</h3>
+          <p class="mt-1 text-[13px] font-600 text-burg">$4M Velo Token + $1M Evry Token &mdash; S.A.F.T</p>
+          <p class="mt-3 text-[13px] leading-relaxed text-stone-500">DeltaBoxx backed the Velo ecosystem through two S.A.F.T instruments — a $4M allocation to the Velo token and a $1M allocation to Evry, Velo's financial network layer enabling stablecoin-based digital credit for emerging markets.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Current Holdings -->
+  <p class="mb-10 text-[11px] font-700 uppercase tracking-[0.32em] text-burg text-center">Current Holdings</p>
+
+  <div class="flex flex-wrap justify-center gap-4 mb-8">
     <div class="h-16 w-16 overflow-hidden rounded-full border border-stone-200 bg-white sm:h-20 sm:w-20"><img src="https://s2.coinmarketcap.com/static/img/coins/64x64/5632.png"  alt="Arweave"        class="h-full w-full object-cover"></div>
     <div class="h-16 w-16 overflow-hidden rounded-full border border-stone-200 bg-white sm:h-20 sm:w-20"><img src="https://s2.coinmarketcap.com/static/img/coins/64x64/7186.png"  alt="PancakeSwap"    class="h-full w-full object-cover"></div>
     <div class="h-16 w-16 overflow-hidden rounded-full border border-stone-200 bg-white sm:h-20 sm:w-20"><img src="https://s2.coinmarketcap.com/static/img/coins/64x64/3717.png"  alt="Wrapped Bitcoin" class="h-full w-full object-cover"></div>
@@ -103,7 +138,7 @@
     <div class="h-16 w-16 overflow-hidden rounded-full border border-stone-200 bg-white sm:h-20 sm:w-20"><img src="https://s2.coinmarketcap.com/static/img/coins/64x64/2010.png"  alt="Cardano"         class="h-full w-full object-cover"></div>
   </div>
 
-  <div class="flex flex-wrap gap-4 mb-8">
+  <div class="flex flex-wrap justify-center gap-4 mb-8">
     <div class="h-16 w-16 overflow-hidden rounded-full border border-stone-200 bg-white sm:h-20 sm:w-20"><img src="https://s2.coinmarketcap.com/static/img/coins/64x64/4030.png"  alt="Algorand"        class="h-full w-full object-cover"></div>
     <div class="h-16 w-16 overflow-hidden rounded-full border border-stone-200 bg-white sm:h-20 sm:w-20"><img src="https://s2.coinmarketcap.com/static/img/coins/64x64/5604.png"  alt="Secret Network"  class="h-full w-full object-cover"></div>
     <div class="h-16 w-16 overflow-hidden rounded-full border border-stone-200 bg-white sm:h-20 sm:w-20"><img src="https://s2.coinmarketcap.com/static/img/coins/64x64/11841.png" alt="Arbitrum"         class="h-full w-full object-cover"></div>
@@ -113,7 +148,7 @@
     <div class="h-16 w-16 overflow-hidden rounded-full border border-stone-200 bg-white sm:h-20 sm:w-20"><img src="https://s2.coinmarketcap.com/static/img/coins/64x64/11156.png" alt="dYdX"             class="h-full w-full object-cover"></div>
   </div>
 
-  <div class="flex flex-wrap gap-4">
+  <div class="flex flex-wrap justify-center gap-4">
     <div class="h-16 w-16 overflow-hidden rounded-full border border-stone-200 bg-white sm:h-20 sm:w-20"><img src="https://s2.coinmarketcap.com/static/img/coins/64x64/6535.png"  alt="NEAR Protocol"   class="h-full w-full object-cover"></div>
     <div class="h-16 w-16 overflow-hidden rounded-full border border-stone-200 bg-white sm:h-20 sm:w-20"><img src="https://s2.coinmarketcap.com/static/img/coins/64x64/6636.png"  alt="Polkadot"        class="h-full w-full object-cover"></div>
     <div class="h-16 w-16 overflow-hidden rounded-full border border-stone-200 bg-white sm:h-20 sm:w-20"><img src="https://s2.coinmarketcap.com/static/img/coins/64x64/13502.png" alt="Worldcoin"        class="h-full w-full object-cover"></div>
