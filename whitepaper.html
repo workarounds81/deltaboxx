@@ -9,20 +9,21 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     body { font-family: 'Inter', sans-serif; color: #1a1a2e; background: #fff; }
     a { text-decoration: none; color: inherit; }
-    :root { --burgundy: #722F37; --slate: #2D3436; --bg: #f8f6f3; --border: #e8e4df; --text: #1a1a2e; --muted: #5a5a6e; }
+    :root { --brand: #3b82f6;
+      --brand-dark: #2f6fda; --slate: #2D3436; --bg: #f8f6f3; --border: #e8e4df; --text: #1a1a2e; --muted: #5a5a6e; }
 
     nav {
       display: flex; align-items: center; justify-content: space-between;
       padding: 18px 60px; background: #fff; border-bottom: 1px solid var(--border);
       position: sticky; top: 0; z-index: 100;
     }
-    .logo { display: flex; align-items: center; gap: 12px; }
-    .logo-text { font-size: 17px; font-weight: 700; letter-spacing: 3px; color: var(--burgundy); text-transform: uppercase; }
+    .logo { display: flex; align-items: center; }
+    .logo-image { height: 40px; width: auto; display: block; }
     .nav-links { display: flex; gap: 32px; list-style: none; }
     .nav-links a { font-size: 13px; font-weight: 500; color: #636e72; padding: 6px 0; border-bottom: 2px solid transparent; transition: all .2s; }
-    .nav-links a:hover { color: var(--burgundy); border-bottom-color: var(--burgundy); }
+    .nav-links a:hover { color: var(--brand); border-bottom-color: var(--brand); }
     .hamburger { display: none; flex-direction: column; justify-content: space-between; width: 26px; height: 18px; background: none; border: none; cursor: pointer; padding: 0; }
-    .hamburger span { display: block; height: 2px; width: 100%; background: var(--burgundy); border-radius: 2px; transition: all .3s; }
+    .hamburger span { display: block; height: 2px; width: 100%; background: var(--brand); border-radius: 2px; transition: all .3s; }
     .hamburger.open span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
     .hamburger.open span:nth-child(2) { opacity: 0; }
     .hamburger.open span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
@@ -30,8 +31,8 @@
     .mobile-menu.open { display: flex; }
     .mobile-menu a { font-size: 15px; font-weight: 500; color: var(--slate); padding: 13px 0; border-bottom: 1px solid var(--border); }
     .mobile-menu a:last-child { border-bottom: none; }
-    .mobile-menu a:hover { color: var(--burgundy); }
-    .motto { background: var(--burgundy); color: rgba(255,255,255,.85); text-align: center; padding: 13px 20px; font-size: 11px; font-weight: 500; letter-spacing: 4px; text-transform: uppercase; }
+    .mobile-menu a:hover { color: var(--brand); }
+    .motto { background: var(--brand); color: rgba(255,255,255,.85); text-align: center; padding: 13px 20px; font-size: 11px; font-weight: 500; letter-spacing: 4px; text-transform: uppercase; }
 
     /* COVER */
     .cover {
@@ -40,48 +41,48 @@
       display: flex; align-items: flex-start; justify-content: space-between; gap: 60px; flex-wrap: wrap;
     }
     .cover-left { flex: 1; min-width: 280px; }
-    .cover-tag { font-size: 11px; font-weight: 700; letter-spacing: 5px; text-transform: uppercase; color: var(--burgundy); margin-bottom: 24px; }
+    .cover-tag { font-size: 11px; font-weight: 700; letter-spacing: 5px; text-transform: uppercase; color: var(--brand); margin-bottom: 24px; }
     .cover h1 { font-size: 56px; font-weight: 800; line-height: 1.1; color: var(--text); margin-bottom: 20px; }
-    .cover h1 span { color: var(--burgundy); }
+    .cover h1 span { color: var(--brand); }
     .cover-sub { font-size: 18px; color: var(--muted); line-height: 1.7; max-width: 560px; margin-bottom: 40px; }
     .cover-meta { display: flex; gap: 40px; flex-wrap: wrap; }
     .cover-meta-item { }
-    .cover-meta-item .label { font-size: 10px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--burgundy); margin-bottom: 4px; }
+    .cover-meta-item .label { font-size: 10px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--brand); margin-bottom: 4px; }
     .cover-meta-item .val { font-size: 14px; color: var(--muted); }
     .cover-right { flex: 0 0 260px; }
     .cover-toc { background: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 28px 32px; }
-    .cover-toc h3 { font-size: 11px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--burgundy); margin-bottom: 18px; }
+    .cover-toc h3 { font-size: 11px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--brand); margin-bottom: 18px; }
     .cover-toc ol { list-style: none; counter-reset: toc; }
     .cover-toc ol li { counter-increment: toc; font-size: 13px; color: var(--muted); padding: 8px 0; border-bottom: 1px solid var(--border); display: flex; gap: 10px; align-items: baseline; }
     .cover-toc ol li:last-child { border-bottom: none; }
-    .cover-toc ol li::before { content: counter(toc, decimal-leading-zero); font-size: 10px; font-weight: 700; color: var(--burgundy); flex-shrink: 0; }
+    .cover-toc ol li::before { content: counter(toc, decimal-leading-zero); font-size: 10px; font-weight: 700; color: var(--brand); flex-shrink: 0; }
 
     /* DISCLAIMER BAR */
-    .disclaimer-bar { background: #fff8f8; border-top: 1px solid #f0d0d0; border-bottom: 1px solid #f0d0d0; padding: 14px 80px; font-size: 12px; color: #9b4a50; line-height: 1.6; }
+    .disclaimer-bar { background: #f4f8ff; border-top: 1px solid #d4e4ff; border-bottom: 1px solid #d4e4ff; padding: 14px 80px; font-size: 12px; color: #2e5fa9; line-height: 1.6; }
 
     /* CONTENT BODY */
     .wp-body { max-width: 900px; margin: 0 auto; padding: 80px 40px 120px; }
 
     /* SECTION */
     .wp-section { margin-bottom: 72px; }
-    .wp-section-num { font-size: 10px; font-weight: 700; letter-spacing: 4px; text-transform: uppercase; color: var(--burgundy); margin-bottom: 6px; }
+    .wp-section-num { font-size: 10px; font-weight: 700; letter-spacing: 4px; text-transform: uppercase; color: var(--brand); margin-bottom: 6px; }
     .wp-section h2 { font-size: 32px; font-weight: 800; color: var(--text); margin-bottom: 28px; padding-bottom: 16px; border-bottom: 2px solid var(--border); }
     .wp-section h3 { font-size: 18px; font-weight: 700; color: var(--text); margin: 32px 0 14px; }
     .wp-section p { font-size: 15px; line-height: 1.95; color: var(--muted); margin-bottom: 20px; }
     .wp-section ul { padding-left: 0; list-style: none; margin-bottom: 20px; }
     .wp-section ul li { font-size: 15px; line-height: 1.85; color: var(--muted); padding: 8px 0 8px 22px; position: relative; border-bottom: 1px solid var(--border); }
     .wp-section ul li:last-child { border-bottom: none; }
-    .wp-section ul li::before { content: '—'; position: absolute; left: 0; color: var(--burgundy); }
+    .wp-section ul li::before { content: '—'; position: absolute; left: 0; color: var(--brand); }
     .wp-section ul li strong { color: var(--text); }
 
     /* HIGHLIGHT BOX */
-    .highlight { background: var(--bg); border-left: 4px solid var(--burgundy); padding: 24px 28px; border-radius: 0 6px 6px 0; margin: 28px 0; }
+    .highlight { background: var(--bg); border-left: 4px solid var(--brand); padding: 24px 28px; border-radius: 0 6px 6px 0; margin: 28px 0; }
     .highlight p { margin: 0; font-size: 16px; font-style: italic; color: var(--text); line-height: 1.8; }
 
     /* PILLARS GRID */
     .pillars { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 28px 0; }
     .pillar { background: var(--bg); border: 1px solid var(--border); border-radius: 8px; padding: 28px; }
-    .pillar-num { font-size: 28px; font-weight: 800; color: var(--burgundy); opacity: 0.25; margin-bottom: 8px; }
+    .pillar-num { font-size: 28px; font-weight: 800; color: var(--brand); opacity: 0.25; margin-bottom: 8px; }
     .pillar h4 { font-size: 15px; font-weight: 700; color: var(--text); margin-bottom: 10px; }
     .pillar p { font-size: 13px; color: var(--muted); line-height: 1.8; margin: 0; }
 
@@ -92,18 +93,18 @@
     .token-table tr:last-child td { border-bottom: none; }
     .token-table tr:nth-child(even) td { background: var(--bg); }
     .token-table td:first-child { font-weight: 600; color: var(--text); }
-    .token-table td.pct { color: var(--burgundy); font-weight: 700; }
-    .token-bar { display: inline-block; height: 6px; background: var(--burgundy); border-radius: 3px; opacity: 0.5; vertical-align: middle; margin-left: 8px; }
+    .token-table td.pct { color: var(--brand); font-weight: 700; }
+    .token-bar { display: inline-block; height: 6px; background: var(--brand); border-radius: 3px; opacity: 0.5; vertical-align: middle; margin-left: 8px; }
 
     /* ROADMAP */
     .roadmap { margin: 28px 0; }
     .roadmap-item { display: flex; gap: 24px; margin-bottom: 0; }
     .roadmap-line { display: flex; flex-direction: column; align-items: center; flex-shrink: 0; }
-    .roadmap-dot { width: 14px; height: 14px; border-radius: 50%; background: var(--burgundy); flex-shrink: 0; margin-top: 4px; }
+    .roadmap-dot { width: 14px; height: 14px; border-radius: 50%; background: var(--brand); flex-shrink: 0; margin-top: 4px; }
     .roadmap-connector { width: 2px; flex: 1; background: var(--border); min-height: 32px; }
     .roadmap-item:last-child .roadmap-connector { display: none; }
     .roadmap-content { padding-bottom: 36px; }
-    .roadmap-content .q { font-size: 11px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--burgundy); margin-bottom: 6px; }
+    .roadmap-content .q { font-size: 11px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--brand); margin-bottom: 6px; }
     .roadmap-content h4 { font-size: 16px; font-weight: 700; color: var(--text); margin-bottom: 8px; }
     .roadmap-content p { font-size: 14px; color: var(--muted); line-height: 1.8; margin: 0; }
 
@@ -111,15 +112,15 @@
     .stats { display: flex; gap: 0; margin: 36px 0; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
     .stat { flex: 1; padding: 28px 24px; text-align: center; border-right: 1px solid var(--border); }
     .stat:last-child { border-right: none; }
-    .stat-val { font-size: 36px; font-weight: 800; color: var(--burgundy); margin-bottom: 6px; }
+    .stat-val { font-size: 36px; font-weight: 800; color: var(--brand); margin-bottom: 6px; }
     .stat-label { font-size: 12px; color: var(--muted); letter-spacing: 1px; }
 
     /* CTA */
     .wp-cta { background: var(--slate); border-radius: 10px; padding: 52px 48px; text-align: center; margin: 60px 0 0; }
     .wp-cta h3 { font-size: 28px; font-weight: 800; color: #fff; margin-bottom: 14px; }
     .wp-cta p { font-size: 15px; color: rgba(255,255,255,.6); margin-bottom: 32px; }
-    .wp-cta a { display: inline-block; background: var(--burgundy); color: #fff; padding: 14px 40px; border-radius: 4px; font-size: 14px; font-weight: 600; letter-spacing: 1px; margin: 0 8px 12px; }
-    .wp-cta a:hover { background: #5d2730; }
+    .wp-cta a { display: inline-block; background: var(--brand); color: #fff; padding: 14px 40px; border-radius: 4px; font-size: 14px; font-weight: 600; letter-spacing: 1px; margin: 0 8px 12px; }
+    .wp-cta a:hover { background: var(--brand-dark); }
     .wp-cta a.secondary { background: transparent; border: 1px solid rgba(255,255,255,.3); }
     .wp-cta a.secondary:hover { border-color: #fff; }
 
@@ -149,12 +150,7 @@
 
 <nav>
   <a class="logo" href="index.html">
-    <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
-      <rect width="36" height="36" rx="5" fill="#722F37"/>
-      <path d="M18 7L30 29H6Z" stroke="white" stroke-width="2.2" fill="none" stroke-linejoin="round"/>
-      <path d="M18 14L25 28H11Z" stroke="white" stroke-width="1.4" fill="none" stroke-linejoin="round"/>
-    </svg>
-    <span class="logo-text">DeltaBoxx</span>
+    <img src="images/deltaboxx.png" alt="DeltaBoxx logo" class="logo-image">
   </a>
   <ul class="nav-links">
     <li><a href="index.html">Home</a></li>
@@ -357,7 +353,7 @@
   <p>The DBXX token has been designed with long-term value alignment as the primary objective. Supply is fixed. Distribution is structured to reward genuine participation and penalise short-term speculation.</p>
   <h3>Total Supply: 10,000,000,000 DBXX</h3>
   <p style="font-size:13px; background:var(--bg); border:1px solid var(--border); border-radius:6px; padding:14px 18px; font-family:monospace; color:var(--slate); word-break:break-all;">
-    <strong style="font-family:'Inter',sans-serif; letter-spacing:2px; font-size:10px; text-transform:uppercase; color:var(--burgundy);">Contract Address &nbsp;</strong>
+    <strong style="font-family:'Inter',sans-serif; letter-spacing:2px; font-size:10px; text-transform:uppercase; color:var(--brand);">Contract Address &nbsp;</strong>
     JDw1kcaKr66GPeP8jhzMkmCTgDaugPGJt4qS7jeKZL2E
   </p>
   <table class="token-table">
@@ -510,7 +506,7 @@
   <p>The DBXX token is a utility token granting governance rights and access to DeltaBoxx platform services. It is not intended to constitute a security, investment contract, or financial instrument under the laws of any jurisdiction. Participation in the DBXX token sale is subject to applicable local laws and regulations. It is the sole responsibility of each prospective participant to ensure compliance with laws applicable to them.</p>
   <p>Nothing in this document constitutes financial, legal, tax, or investment advice. DeltaBoxx does not make any representation or warranty, express or implied, as to the accuracy, completeness, or reliability of the information contained herein. Forward-looking statements, projections, and targets contained in this document are illustrative only and subject to material risk and uncertainty.</p>
   <p>DeltaBoxx reserves the right to amend or update this whitepaper at any time without notice. The most current version of this document will always be available at deltaboxx.com.</p>
-  <p style="font-size:13px; color: #9b4a50; background: #fff8f8; border: 1px solid #f0d0d0; border-radius: 6px; padding: 16px 20px; margin-top: 24px;"><strong>NOT FINANCIAL ADVICE.</strong> This document is for informational purposes only. Cryptocurrency and digital asset investments involve significant risk including the potential loss of your entire investment. DeltaBoxx does not provide regulated financial advice. Consult a qualified financial advisor before making any investment decision.</p>
+  <p style="font-size:13px; color: #2e5fa9; background: #f4f8ff; border: 1px solid #d4e4ff; border-radius: 6px; padding: 16px 20px; margin-top: 24px;"><strong>NOT FINANCIAL ADVICE.</strong> This document is for informational purposes only. Cryptocurrency and digital asset investments involve significant risk including the potential loss of your entire investment. DeltaBoxx does not provide regulated financial advice. Consult a qualified financial advisor before making any investment decision.</p>
 </div>
 
 <!-- CTA -->
