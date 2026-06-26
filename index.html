@@ -149,16 +149,16 @@
   </p>
 </div>
 
-<main>
+<main class="relative z-10">
+
+<!-- Fixed globe — sits behind everything, visible on every section as user scrolls -->
+<canvas id="globeCanvas"
+        class="pointer-events-none fixed inset-0 z-0 h-full w-full opacity-100"
+        aria-hidden="true"></canvas>
 
 <!-- ═══════════════════════ HERO / THESIS ═══════════════════════ -->
-<section id="thesis" class="relative overflow-hidden border-b border-stone-200">
+<section id="thesis" class="relative overflow-hidden border-b border-stone-200 bg-parchment/80">
   <div class="hero-grid pointer-events-none absolute inset-0 opacity-60"></div>
-
-  <!-- Rotating dot-globe -->
-  <canvas id="globeCanvas"
-          class="pointer-events-none absolute right-0 top-0 h-full w-full opacity-100"
-          aria-hidden="true"></canvas>
 
   <!-- Warm left glow -->
   <div class="pointer-events-none absolute -left-40 -top-40 h-[500px] w-[500px] rounded-full bg-burg/8 blur-3xl"></div>
@@ -301,7 +301,7 @@
 </section>
 
 <!-- ═══════════════════════ FLAGSHIP DEAL ═══════════════════════ -->
-<section id="flagship" class="border-b border-stone-200 bg-white">
+<section id="flagship" class="border-b border-stone-200 bg-white/90 backdrop-blur-[2px]">
   <div class="mx-auto max-w-[1700px] px-5 py-16 sm:px-8 sm:py-20 lg:py-24">
 
     <div class="reveal mb-8 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
@@ -433,7 +433,7 @@
 </section>
 
 <!-- ═══════════════════════ NODE PORTAL ═══════════════════════ -->
-<section id="node" class="border-b border-stone-200 bg-parchment">
+<section id="node" class="border-b border-stone-200 bg-parchment/88 backdrop-blur-[2px]">
   <div class="mx-auto max-w-[1700px] px-5 py-16 sm:px-8 sm:py-20 lg:py-24">
 
     <div class="reveal mb-8 text-center">
@@ -526,7 +526,7 @@
 </section>
 
 <!-- ═══════════════════════ FAQ ═══════════════════════ -->
-<section class="border-b border-stone-200 bg-white" id="framework">
+<section class="border-b border-stone-200 bg-white/90 backdrop-blur-[2px]" id="framework">
   <div class="mx-auto max-w-[1700px] px-5 py-16 sm:px-8 sm:py-20">
     <div class="reveal mb-10 text-center">
       <p class="text-[11px] font-700 uppercase tracking-[0.3em] text-burg">Common Questions</p>
@@ -873,14 +873,12 @@
   const SPEED = 0.0018; // radians per frame (~60s full rotation)
 
   function resize() {
-    const section = canvas.closest('section');
-    W = canvas.width  = section.offsetWidth;
-    H = canvas.height = section.offsetHeight;
+    W = canvas.width  = window.innerWidth;
+    H = canvas.height = window.innerHeight;
     R  = Math.min(W, H) * 0.52;
-    CX = W * 0.72; // sit right-of-centre
+    CX = W * 0.72;
     CY = H * 0.50;
-    // On narrow screens, centre it softly
-    if (W < 768) { CX = W * 0.5; R = Math.min(W,H)*0.44; }
+    if (W < 768) { CX = W * 0.5; R = Math.min(W, H) * 0.44; }
   }
 
   /* ── Orthographic project ── */
