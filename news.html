@@ -1,131 +1,124 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
   <meta charset="UTF-8">
   <link rel="icon" type="image/png" href="images/DeltaboxxLogo.png">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>News — DeltaBoxx</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans:    ['Inter', 'system-ui', 'sans-serif'],
+            grotesk: ['"Space Grotesk"', 'Inter', 'sans-serif'],
+          },
+          fontWeight: { 300:'300',400:'400',500:'500',600:'600',700:'700',800:'800',900:'900' },
+          colors: {
+            parchment: '#F9F7F4', ink: '#0F1117', vault: '#12151E',
+            panel: '#1C2030', burg: '#722F37', 'burg-d': '#5C2129', 'burg-l': '#8B3A44',
+          },
+        },
+      },
+    };
+  </script>
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: 'Inter', sans-serif; color: #1a1a2e; background: #fff; }
-    a { text-decoration: none; color: inherit; }
-    :root { --brand: #3b82f6;
-      --brand-dark: #2f6fda; --slate: #2D3436; --bg: #f8f6f3; --border: #e8e4df; --text: #1a1a2e; --muted: #5a5a6e; }
-
-    nav {
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 18px 60px; background: #fff; border-bottom: 1px solid var(--border);
-      position: sticky; top: 0; z-index: 100;
-    }
-    .logo { display: flex; align-items: center; }
-    .logo-image { height: 60px; width: auto; display: block; }
-    .nav-links { display: flex; gap: 32px; list-style: none; }
-    .nav-links a { font-size: 13px; font-weight: 500; color: #636e72; padding: 6px 0; border-bottom: 2px solid transparent; transition: all .2s; }
-    .nav-links a:hover, .nav-links a.active { color: var(--brand); border-bottom-color: var(--brand); }
-
-    .hamburger { display: none; flex-direction: column; justify-content: space-between; width: 26px; height: 18px; background: none; border: none; cursor: pointer; padding: 0; }
-    .hamburger span { display: block; height: 2px; width: 100%; background: var(--brand); border-radius: 2px; transition: all .3s; }
-    .hamburger.open span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
-    .hamburger.open span:nth-child(2) { opacity: 0; }
-    .hamburger.open span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
-    .mobile-menu { display: none; flex-direction: column; background: #fff; border-top: 1px solid var(--border); padding: 16px 24px 24px; position: sticky; top: 57px; z-index: 99; }
-    .mobile-menu.open { display: flex; }
-    .mobile-menu a { font-size: 15px; font-weight: 500; color: var(--slate); padding: 13px 0; border-bottom: 1px solid var(--border); }
-    .mobile-menu a:last-child { border-bottom: none; }
-    .mobile-menu a:hover { color: var(--brand); }
-
-    .motto { background: var(--brand); color: rgba(255,255,255,.85); text-align: center; padding: 13px 20px; font-size: 11px; font-weight: 500; letter-spacing: 4px; text-transform: uppercase; }
-
-    .page-hero { background: var(--bg); padding: 80px 60px; border-bottom: 1px solid var(--border); }
-    .page-hero h1 { font-size: 48px; font-weight: 800; color: var(--text); margin-bottom: 12px; }
-    .page-hero .sub { font-size: 16px; color: var(--muted); }
-
-    .news-section { max-width: 1700px; margin: 0 auto; padding: 80px 80px 100px; }
-    .section-label { font-size: 11px; font-weight: 700; letter-spacing: 4px; text-transform: uppercase; color: var(--brand); margin-bottom: 40px; }
-
-    .news-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
-    .news-card {
-      border: 1px solid var(--border); border-radius: 6px;
-      padding: 32px; background: #fff;
-      transition: box-shadow .2s;
-    }
-    .news-card:hover { box-shadow: 0 4px 24px rgba(0,0,0,0.07); }
-    .news-date { font-size: 11px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--brand); margin-bottom: 14px; }
-    .news-title { font-size: 17px; font-weight: 700; color: var(--text); margin-bottom: 14px; line-height: 1.4; }
-    .news-excerpt { font-size: 14px; color: var(--muted); line-height: 1.8; }
-
-    .coming-soon {
-      text-align: center; padding: 100px 20px;
-      color: var(--muted); font-size: 15px;
-    }
-    .coming-soon .icon { font-size: 48px; margin-bottom: 20px; opacity: 0.3; }
-    .coming-soon h3 { font-size: 22px; font-weight: 700; color: var(--text); margin-bottom: 12px; }
-
-    footer { background: var(--slate); color: rgba(255,255,255,.45); padding: 28px; text-align: center; font-size: 13px; }
-
-    @media (max-width: 768px) {
-      nav { padding: 16px 20px; }
-      .nav-links { display: none; }
-      .hamburger { display: flex; }
-      .page-hero { padding: 60px 20px; } .page-hero h1 { font-size: 32px; }
-      .news-section { padding: 48px 20px 60px; }
-      .news-grid { grid-template-columns: 1fr; }
-    }
+    html { background: #F9F7F4; }
+    body { font-family: 'Inter', sans-serif; -webkit-font-smoothing: antialiased; }
   </style>
 </head>
-<body>
+<body class="bg-parchment text-ink antialiased overflow-x-hidden">
 
-<nav>
-  <a class="logo" href="index.html">
-    <img src="images/DeltaboxxLogo.png" alt="DeltaBoxx logo" class="logo-image">
-  </a>
-  <ul class="nav-links">
-    <li><a href="index.html">Home</a></li>
-    <li><a href="about.html">About</a></li>
-    <li><a href="index.html#framework">Investment Framework</a></li>
-    <li><a href="venture.html">Portfolio</a></li>
-    <li><a href="news.html" class="active">News</a></li>
-    <li><a href="client-login.html">Investor Login</a></li>
-  </ul>
-  <button class="hamburger" id="hamburger" aria-label="Toggle menu">
-    <span></span><span></span><span></span>
-  </button>
-</nav>
+<!-- NAV -->
+<header class="sticky top-0 z-50 bg-parchment/90 backdrop-blur-xl border-b border-stone-200/80">
+  <nav class="mx-auto flex max-w-[1700px] items-center justify-between px-5 py-3 sm:px-8 sm:py-3.5">
+    <a href="index.html" class="flex items-center">
+      <img src="images/DeltaboxxLogo.png" alt="DeltaBoxx" class="h-16 w-auto">
+    </a>
+    <ul class="hidden items-center gap-7 lg:flex">
+      <li><a href="index.html#thesis"   class="text-[13px] font-500 text-stone-500 transition hover:text-ink">Thesis</a></li>
+      <li><a href="index.html#flagship" class="text-[13px] font-500 text-stone-500 transition hover:text-ink">Flagship Deal</a></li>
+      <li><a href="venture.html"        class="text-[13px] font-500 text-stone-500 transition hover:text-ink">Portfolio</a></li>
+      <li><a href="about.html"          class="text-[13px] font-500 text-stone-500 transition hover:text-ink">About</a></li>
+      <li><a href="news.html"           class="text-[13px] font-600 text-burg border-b-2 border-burg pb-0.5">News</a></li>
+    </ul>
+    <div class="flex items-center gap-2.5">
+      <a href="client-login.html" class="hidden min-h-[42px] items-center rounded-lg bg-burg px-5 text-[13px] font-600 text-white transition hover:bg-burg-d sm:inline-flex">
+        Investor Login
+      </a>
+      <button id="hamburger" aria-label="Toggle menu" aria-expanded="false"
+              class="grid h-10 w-10 place-items-center rounded-lg border border-stone-200 bg-white lg:hidden">
+        <span class="relative block h-[14px] w-[18px]">
+          <span class="absolute left-0 top-0 h-0.5 w-full rounded bg-ink transition-transform duration-300"></span>
+          <span class="absolute left-0 top-1.5 h-0.5 w-full rounded bg-ink transition-opacity duration-300"></span>
+          <span class="absolute left-0 top-3 h-0.5 w-full rounded bg-ink transition-transform duration-300"></span>
+        </span>
+      </button>
+    </div>
+  </nav>
+  <div id="mobileMenu" class="hidden border-t border-stone-200 bg-parchment px-5 py-3 lg:hidden">
+    <div class="flex flex-col">
+      <a href="index.html#thesis"   class="min-h-[44px] flex items-center border-b border-stone-100 text-[15px] font-500 text-ink">Thesis</a>
+      <a href="index.html#flagship" class="min-h-[44px] flex items-center border-b border-stone-100 text-[15px] font-500 text-ink">Flagship Deal</a>
+      <a href="venture.html"        class="min-h-[44px] flex items-center border-b border-stone-100 text-[15px] font-500 text-ink">Portfolio</a>
+      <a href="about.html"          class="min-h-[44px] flex items-center border-b border-stone-100 text-[15px] font-500 text-ink">About</a>
+      <a href="news.html"           class="min-h-[44px] flex items-center border-b border-stone-100 text-[15px] font-600 text-burg">News</a>
+      <a href="client-login.html"   class="min-h-[44px] flex items-center text-[15px] font-600 text-burg">Investor Login</a>
+    </div>
+  </div>
+</header>
 
-<div class="mobile-menu" id="mobileMenu">
-  <a href="index.html">Home</a>
-  <a href="about.html">About</a>
-  <a href="index.html#framework">Investment Framework</a>
-  <a href="venture.html">Portfolio</a>
-  <a href="news.html">News</a>
-  <a href="client-login.html">Investor Login</a>
+<!-- Motto bar -->
+<div class="bg-burg">
+  <p class="mx-auto max-w-[1700px] px-5 py-2.5 text-center text-[10px] font-600 uppercase tracking-[0.42em] text-white/80 sm:text-[11px]">
+    Infrastructure First. Everything Else Follows.
+  </p>
 </div>
 
-<div class="motto">Infrastructure First. Everything Else Follows.</div>
-
-<div class="page-hero">
-  <h1>News</h1>
-  <p class="sub">Insights, updates, and perspectives from the DeltaBoxx team.</p>
-</div>
-
-<div class="news-section">
-  <p class="section-label">Latest</p>
-  <div class="coming-soon">
-    <div class="icon">&#9632;</div>
-    <h3>Coming Soon</h3>
-    <p>News and insights from the DeltaBoxx team will be published here.</p>
+<!-- Page hero -->
+<div class="border-b border-stone-200 bg-parchment px-5 py-16 sm:px-8 sm:py-20">
+  <div class="mx-auto max-w-[1700px]">
+    <p class="mb-3 text-[11px] font-700 uppercase tracking-[0.32em] text-burg">Latest</p>
+    <h1 class="font-grotesk text-4xl font-700 text-ink sm:text-5xl">News</h1>
+    <p class="mt-4 text-base text-stone-500 sm:text-lg">Insights, updates, and perspectives from the DeltaBoxx team.</p>
   </div>
 </div>
 
-<footer>Copyright &copy; 2024 DeltaBoxx. All rights reserved.</footer>
+<!-- Content -->
+<main class="mx-auto max-w-[1700px] px-5 py-20 sm:px-8">
+  <div class="flex flex-col items-center justify-center py-20 text-center">
+    <div class="mb-6 flex h-16 w-16 items-center justify-center rounded-2xl border border-stone-200 bg-white">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" class="text-stone-300">
+        <path d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10l6 6v8a2 2 0 01-2 2z" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M17 20v-8H7v8M7 4v4h8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+    <h3 class="font-grotesk mb-2 text-xl font-700 text-ink">Coming Soon</h3>
+    <p class="text-[14px] text-stone-500">News and insights from the DeltaBoxx team will be published here.</p>
+  </div>
+</main>
+
+<!-- Footer -->
+<footer class="bg-ink text-white">
+  <div class="mx-auto max-w-[1700px] px-5 py-12 sm:px-8">
+    <div class="flex flex-col items-start gap-6 sm:flex-row sm:items-center sm:justify-between">
+      <img src="images/DeltaboxxLogo.png" alt="DeltaBoxx" class="h-10 w-auto brightness-0 invert">
+      <p class="text-[13px] text-white/40">Copyright &copy; 2024 DeltaBoxx. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
 <script>
-const hamburger = document.getElementById('hamburger');
-const mobileMenu = document.getElementById('mobileMenu');
-hamburger.addEventListener('click', () => {
-  hamburger.classList.toggle('open');
-  mobileMenu.classList.toggle('open');
-});
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  hamburger.addEventListener('click', () => {
+    const open = mobileMenu.classList.toggle('hidden') === false;
+    hamburger.setAttribute('aria-expanded', String(open));
+  });
 </script>
 </body>
 </html>

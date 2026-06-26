@@ -1,154 +1,171 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
   <meta charset="UTF-8">
   <link rel="icon" type="image/png" href="images/DeltaboxxLogo.png">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>About — DeltaBoxx</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans:    ['Inter', 'system-ui', 'sans-serif'],
+            grotesk: ['"Space Grotesk"', 'Inter', 'sans-serif'],
+          },
+          fontWeight: { 300:'300',400:'400',500:'500',600:'600',700:'700',800:'800',900:'900' },
+          colors: {
+            parchment: '#F9F7F4', ink: '#0F1117', vault: '#12151E',
+            panel: '#1C2030', burg: '#722F37', 'burg-d': '#5C2129', 'burg-l': '#8B3A44',
+          },
+        },
+      },
+    };
+  </script>
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: 'Inter', sans-serif; color: #1a1a2e; background: #fff; }
-    a { text-decoration: none; color: inherit; }
-    :root { --brand: #3b82f6;
-      --brand-dark: #2f6fda; --slate: #2D3436; --bg: #f8f6f3; --border: #e8e4df; --text: #1a1a2e; --muted: #5a5a6e; }
-
-    nav {
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 18px 60px; background: #fff; border-bottom: 1px solid var(--border);
-      position: sticky; top: 0; z-index: 100;
-    }
-    .logo { display: flex; align-items: center; }
-    .logo-image { height: 60px; width: auto; display: block; }
-    .nav-links { display: flex; gap: 32px; list-style: none; }
-    .nav-links a { font-size: 13px; font-weight: 500; color: #636e72; padding: 6px 0; border-bottom: 2px solid transparent; transition: all .2s; }
-    .nav-links a:hover, .nav-links a.active { color: var(--brand); border-bottom-color: var(--brand); }
-
-    .hamburger {
-      display: none; flex-direction: column; justify-content: space-between;
-      width: 26px; height: 18px; background: none; border: none; cursor: pointer; padding: 0;
-    }
-    .hamburger span { display: block; height: 2px; width: 100%; background: var(--brand); border-radius: 2px; transition: all .3s; }
-    .hamburger.open span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
-    .hamburger.open span:nth-child(2) { opacity: 0; }
-    .hamburger.open span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
-    .mobile-menu { display: none; flex-direction: column; background: #fff; border-top: 1px solid var(--border); padding: 16px 24px 24px; position: sticky; top: 57px; z-index: 99; }
-    .mobile-menu.open { display: flex; }
-    .mobile-menu a { font-size: 15px; font-weight: 500; color: var(--slate); padding: 13px 0; border-bottom: 1px solid var(--border); }
-    .mobile-menu a:last-child { border-bottom: none; }
-    .mobile-menu a:hover { color: var(--brand); }
-
-    .motto { background: var(--brand); color: rgba(255,255,255,.85); text-align: center; padding: 13px 20px; font-size: 11px; font-weight: 500; letter-spacing: 4px; text-transform: uppercase; }
-
-    .page-hero {
-      background: var(--bg); padding: 80px 60px;
-      border-bottom: 1px solid var(--border);
-    }
-    .page-hero h1 { font-size: 48px; font-weight: 800; color: var(--text); margin-bottom: 12px; }
-    .page-hero .sub { font-size: 16px; color: var(--muted); }
-
-    .content { max-width: 1700px; margin: 0 auto; padding: 80px 80px 100px; }
-    .content-inner { max-width: 820px; }
-
-    .section-label { font-size: 11px; font-weight: 700; letter-spacing: 4px; text-transform: uppercase; color: var(--brand); margin-bottom: 16px; }
-    .body-text { font-size: 15px; color: var(--muted); line-height: 1.9; margin-bottom: 48px; }
-    h2.section-h { font-size: 26px; font-weight: 800; color: var(--text); margin-bottom: 20px; }
-    .mission-item { margin-bottom: 24px; font-size: 15px; color: var(--muted); line-height: 1.9; }
-    .mission-item strong { color: var(--text); }
-    ul.why-list { list-style: none; padding: 0; }
-    ul.why-list li { font-size: 15px; color: var(--muted); line-height: 1.9; margin-bottom: 20px; padding-left: 20px; position: relative; }
-    ul.why-list li::before { content: '—'; position: absolute; left: 0; color: var(--brand); }
-    ul.why-list li strong { color: var(--text); }
-    .btn-wp {
-      display: inline-block; margin-top: 48px;
-      background: var(--brand); color: #fff;
-      padding: 14px 36px; border-radius: 4px;
-      font-size: 14px; font-weight: 600; letter-spacing: 1px;
-    }
-    .btn-wp:hover { background: var(--brand-dark); }
-
-    footer { background: var(--slate); color: rgba(255,255,255,.45); padding: 28px; text-align: center; font-size: 13px; }
-
-    @media (max-width: 768px) {
-      nav { padding: 16px 20px; }
-      .nav-links { display: none; }
-      .hamburger { display: flex; }
-      .page-hero { padding: 60px 20px; } .page-hero h1 { font-size: 32px; }
-      .content { padding: 48px 20px 60px; }
-    }
+    html { background: #F9F7F4; }
+    body { font-family: 'Inter', sans-serif; -webkit-font-smoothing: antialiased; }
   </style>
 </head>
-<body>
+<body class="bg-parchment text-ink antialiased overflow-x-hidden">
 
-<nav>
-  <a class="logo" href="index.html">
-    <img src="images/DeltaboxxLogo.png" alt="DeltaBoxx logo" class="logo-image">
-  </a>
-  <ul class="nav-links">
-    <li><a href="index.html">Home</a></li>
-    <li><a href="about.html" class="active">About</a></li>
-    <li><a href="index.html#framework">Investment Framework</a></li>
-    <li><a href="venture.html">Portfolio</a></li>
-    <li><a href="news.html">News</a></li>
-    <li><a href="client-login.html">Investor Login</a></li>
-  </ul>
-  <button class="hamburger" id="hamburger" aria-label="Toggle menu">
-    <span></span><span></span><span></span>
-  </button>
-</nav>
-
-<div class="mobile-menu" id="mobileMenu">
-  <a href="index.html">Home</a>
-  <a href="about.html">About</a>
-  <a href="index.html#framework">Investment Framework</a>
-  <a href="venture.html">Portfolio</a>
-  <a href="news.html">News</a>
-  <a href="client-login.html">Investor Login</a>
-</div>
-
-<div class="motto">Infrastructure First. Everything Else Follows.</div>
-
-<div class="page-hero">
-  <h1>About DeltaBoxx</h1>
-  <p class="sub">A venture capital firm investing in blockchain infrastructure and digital assets.</p>
-</div>
-
-<div class="content">
-  <div class="content-inner">
-
-    <p class="section-label">Who We Are</p>
-    <p class="body-text">
-      In the rapidly evolving world of digital assets, DeltaBoxx stands as a focused investment firm for investors seeking exposure to blockchain infrastructure. Our platform is designed to navigate the complexities of digital asset investments, offering a secure, transparent, and research-driven approach for both institutional and accredited investors.
-    </p>
-
-    <h2 class="section-h">Our Mission</h2>
-    <div class="mission-item">
-      <strong>To Back Foundational Infrastructure:</strong> We believe the next decade of value creation will be built on decentralized protocols and infrastructure layers. We identify and back the projects building these primitives at the earliest stages.
-    </div>
-    <div class="mission-item">
-      <strong>To Maximize Returns While Managing Risk:</strong> Our team of experienced analysts and crypto experts meticulously research and vet every investment opportunity. Our strategy involves concentration in high-conviction positions with disciplined risk controls, ensuring a portfolio built for sustainable long-term performance.
-    </div>
-
-    <h2 class="section-h">Why DeltaBoxx</h2>
-    <ul class="why-list">
-      <li><strong>Deep Domain Expertise:</strong> Leveraging years of experience in blockchain and capital markets, our team delivers unparalleled insights guiding investment strategies toward projects with the highest potential for adoption and value creation.</li>
-      <li><strong>Transparency and Trust:</strong> Everything we do is built on a foundation of transparency. Our platform provides real-time performance data, and our smart contract-based investments ensure every transaction is secure, transparent, and verifiable on-chain.</li>
-      <li><strong>Partner-First Approach:</strong> We go beyond capital. Our portfolio founders receive operational support, network access, and strategic guidance to accelerate their path to market leadership.</li>
+<!-- NAV -->
+<header class="sticky top-0 z-50 bg-parchment/90 backdrop-blur-xl border-b border-stone-200/80">
+  <nav class="mx-auto flex max-w-[1700px] items-center justify-between px-5 py-3 sm:px-8 sm:py-3.5">
+    <a href="index.html" class="flex items-center">
+      <img src="images/DeltaboxxLogo.png" alt="DeltaBoxx" class="h-16 w-auto">
+    </a>
+    <ul class="hidden items-center gap-7 lg:flex">
+      <li><a href="index.html#thesis"   class="text-[13px] font-500 text-stone-500 transition hover:text-ink">Thesis</a></li>
+      <li><a href="index.html#flagship" class="text-[13px] font-500 text-stone-500 transition hover:text-ink">Flagship Deal</a></li>
+      <li><a href="venture.html"        class="text-[13px] font-500 text-stone-500 transition hover:text-ink">Portfolio</a></li>
+      <li><a href="about.html"          class="text-[13px] font-600 text-burg border-b-2 border-burg pb-0.5">About</a></li>
+      <li><a href="news.html"           class="text-[13px] font-500 text-stone-500 transition hover:text-ink">News</a></li>
     </ul>
+    <div class="flex items-center gap-2.5">
+      <a href="client-login.html" class="hidden min-h-[42px] items-center rounded-lg bg-burg px-5 text-[13px] font-600 text-white transition hover:bg-burg-d sm:inline-flex">
+        Investor Login
+      </a>
+      <button id="hamburger" aria-label="Toggle menu" aria-expanded="false"
+              class="grid h-10 w-10 place-items-center rounded-lg border border-stone-200 bg-white lg:hidden">
+        <span class="relative block h-[14px] w-[18px]">
+          <span class="absolute left-0 top-0 h-0.5 w-full rounded bg-ink transition-transform duration-300"></span>
+          <span class="absolute left-0 top-1.5 h-0.5 w-full rounded bg-ink transition-opacity duration-300"></span>
+          <span class="absolute left-0 top-3 h-0.5 w-full rounded bg-ink transition-transform duration-300"></span>
+        </span>
+      </button>
+    </div>
+  </nav>
+  <div id="mobileMenu" class="hidden border-t border-stone-200 bg-parchment px-5 py-3 lg:hidden">
+    <div class="flex flex-col">
+      <a href="index.html#thesis"   class="min-h-[44px] flex items-center border-b border-stone-100 text-[15px] font-500 text-ink">Thesis</a>
+      <a href="index.html#flagship" class="min-h-[44px] flex items-center border-b border-stone-100 text-[15px] font-500 text-ink">Flagship Deal</a>
+      <a href="venture.html"        class="min-h-[44px] flex items-center border-b border-stone-100 text-[15px] font-500 text-ink">Portfolio</a>
+      <a href="about.html"          class="min-h-[44px] flex items-center border-b border-stone-100 text-[15px] font-600 text-burg">About</a>
+      <a href="news.html"           class="min-h-[44px] flex items-center border-b border-stone-100 text-[15px] font-500 text-ink">News</a>
+      <a href="client-login.html"   class="min-h-[44px] flex items-center text-[15px] font-600 text-burg">Investor Login</a>
+    </div>
+  </div>
+</header>
 
-    <a href="whitepaper.html" class="btn-wp">Read Whitepaper</a>
+<!-- Motto bar -->
+<div class="bg-burg">
+  <p class="mx-auto max-w-[1700px] px-5 py-2.5 text-center text-[10px] font-600 uppercase tracking-[0.42em] text-white/80 sm:text-[11px]">
+    Infrastructure First. Everything Else Follows.
+  </p>
+</div>
 
+<!-- Page hero -->
+<div class="border-b border-stone-200 bg-parchment px-5 py-16 sm:px-8 sm:py-20">
+  <div class="mx-auto max-w-[1700px]">
+    <p class="mb-3 text-[11px] font-700 uppercase tracking-[0.32em] text-burg">Company</p>
+    <h1 class="font-grotesk text-4xl font-700 text-ink sm:text-5xl">About DeltaBoxx</h1>
+    <p class="mt-4 text-base text-stone-500 sm:text-lg">A venture capital firm investing at the intersection of TradFi, Web3, and AI.</p>
   </div>
 </div>
 
-<footer>Copyright &copy; 2024 DeltaBoxx. All rights reserved.</footer>
+<!-- Content -->
+<main class="mx-auto max-w-[1700px] px-5 py-16 sm:px-8 sm:py-20">
+  <div class="max-w-3xl">
+
+    <section class="mb-14">
+      <p class="mb-4 text-[11px] font-700 uppercase tracking-[0.32em] text-burg">Who We Are</p>
+      <p class="text-[15px] leading-relaxed text-stone-600">
+        In the rapidly evolving world of digital assets and private markets, DeltaBoxx stands as a focused investment firm for investors seeking exposure to next-generation infrastructure. Our platform is designed to navigate the complexities of AI-driven technology, blockchain infrastructure, and real-world asset tokenization — offering a secure, transparent, and research-driven approach for both institutional and accredited investors.
+      </p>
+    </section>
+
+    <section class="mb-14">
+      <h2 class="font-grotesk mb-6 text-2xl font-700 text-ink">Our Mission</h2>
+      <div class="space-y-4">
+        <div class="rounded-xl border border-stone-200 bg-white p-6">
+          <p class="mb-2 text-[13px] font-700 text-ink">Back Foundational Infrastructure</p>
+          <p class="text-[14px] leading-relaxed text-stone-500">We believe the next decade of value creation will be built on AI-native systems, decentralized protocols, and tokenized real-world assets. We identify and back the projects building these primitives at the earliest stages.</p>
+        </div>
+        <div class="rounded-xl border border-stone-200 bg-white p-6">
+          <p class="mb-2 text-[13px] font-700 text-ink">Maximize Returns While Managing Risk</p>
+          <p class="text-[14px] leading-relaxed text-stone-500">Our team of experienced analysts and domain experts meticulously research and vet every opportunity. Our strategy involves concentration in high-conviction positions with disciplined risk controls, ensuring a portfolio built for sustainable long-term performance.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="mb-14">
+      <h2 class="font-grotesk mb-6 text-2xl font-700 text-ink">Why DeltaBoxx</h2>
+      <ul class="space-y-6">
+        <li class="flex gap-4">
+          <span class="mt-1.5 h-2 w-2 flex-shrink-0 rounded-full bg-burg"></span>
+          <div>
+            <p class="text-[14px] font-600 text-ink">Deep Domain Expertise</p>
+            <p class="mt-1 text-[14px] leading-relaxed text-stone-500">Leveraging years of experience across blockchain, private equity, and capital markets, our team delivers unparalleled insights guiding investment strategies toward projects with the highest potential for adoption and value creation.</p>
+          </div>
+        </li>
+        <li class="flex gap-4">
+          <span class="mt-1.5 h-2 w-2 flex-shrink-0 rounded-full bg-burg"></span>
+          <div>
+            <p class="text-[14px] font-600 text-ink">Transparency and Trust</p>
+            <p class="mt-1 text-[14px] leading-relaxed text-stone-500">Everything we do is built on a foundation of transparency. Our platform provides real-time performance data, and our on-chain investments ensure every transaction is secure and verifiable.</p>
+          </div>
+        </li>
+        <li class="flex gap-4">
+          <span class="mt-1.5 h-2 w-2 flex-shrink-0 rounded-full bg-burg"></span>
+          <div>
+            <p class="text-[14px] font-600 text-ink">Partner-First Approach</p>
+            <p class="mt-1 text-[14px] leading-relaxed text-stone-500">We go beyond capital. Our portfolio founders receive operational support, network access, and strategic guidance to accelerate their path to market leadership.</p>
+          </div>
+        </li>
+      </ul>
+    </section>
+
+    <a href="whitepaper.html"
+       class="inline-flex items-center gap-2 rounded-lg bg-burg px-6 py-3 text-[13px] font-600 text-white transition hover:bg-burg-d">
+      Read Whitepaper
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+
+  </div>
+</main>
+
+<!-- Footer -->
+<footer class="bg-ink text-white">
+  <div class="mx-auto max-w-[1700px] px-5 py-12 sm:px-8">
+    <div class="flex flex-col items-start gap-6 sm:flex-row sm:items-center sm:justify-between">
+      <img src="images/DeltaboxxLogo.png" alt="DeltaBoxx" class="h-10 w-auto brightness-0 invert">
+      <p class="text-[13px] text-white/40">Copyright &copy; 2024 DeltaBoxx. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
 <script>
-const hamburger = document.getElementById('hamburger');
-const mobileMenu = document.getElementById('mobileMenu');
-hamburger.addEventListener('click', () => {
-  hamburger.classList.toggle('open');
-  mobileMenu.classList.toggle('open');
-});
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  hamburger.addEventListener('click', () => {
+    const open = mobileMenu.classList.toggle('hidden') === false;
+    hamburger.setAttribute('aria-expanded', String(open));
+  });
 </script>
 </body>
 </html>
